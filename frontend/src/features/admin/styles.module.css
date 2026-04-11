@@ -1,0 +1,61 @@
+@import 'tailwindcss';
+
+.glassCard {
+  @apply border border-(--border)/80 bg-(--surface)/85 shadow-[0_25px_70px_-45px_rgba(15,23,42,0.45)];
+}
+
+.cardHeader {
+  @apply flex flex-col items-start gap-2 p-6;
+}
+
+.cardTitle {
+  @apply text-2xl font-semibold text-(--text);
+}
+
+.cardDescription {
+  @apply text-sm text-(--muted);
+}
+
+.divider {
+  @apply h-px bg-(--border);
+}
+
+.form {
+  @apply space-y-5;
+}
+
+.fieldLabel {
+  @apply block w-full space-y-2;
+}
+
+.labelText {
+  @apply text-sm font-medium text-(--text);
+}
+
+.userName {
+  @apply font-medium text-(--text);
+}
+
+.userEmail {
+  @apply text-sm text-(--muted);
+}
+
+.editCard {
+  @apply border border-(--border) bg-(--surface) shadow-none;
+}
+
+.editCardHeader {
+  @apply flex flex-wrap items-center justify-between gap-3;
+}
+
+.editCardTitle {
+  @apply text-lg font-semibold text-(--text);
+}
+
+.editGrid {
+  @apply grid gap-4 md:grid-cols-2;
+}
+
+.actionsRow {
+  @apply flex flex-wrap gap-3;
+}

@@ -1,0 +1,434 @@
+{
+  "language": {
+    "label": "Language",
+    "ru": "RU",
+    "en": "EN",
+    "uz": "UZ"
+  },
+  "roles": {
+    "mentor": "Mentor",
+    "admin": "Administrator",
+    "intern": "Intern",
+    "none": "No role",
+    "guest": "guest",
+    "byCode": {
+      "ADMIN": "Admin",
+      "MENTOR": "Mentor",
+      "INTERN": "Intern"
+    }
+  },
+  "layout": {
+    "brandTitle": "Click Track",
+    "brandLogoAlt": "Click Track logo",
+    "support": "Support",
+    "logout": "Logout",
+    "openSettings": "Open settings",
+    "titles": {
+      "allInterns": "All Interns",
+      "interns": "Interns",
+      "overview": "Overview",
+      "myProgress": "My Progress",
+      "settings": "Settings",
+      "createUser": "Create User",
+      "manageUsers": "Manage Users",
+      "surveys": "Surveys",
+      "workspace": "Workspace"
+    },
+    "nav": {
+      "dashboard": "Dashboard",
+      "allInterns": "All interns",
+      "surveys": "Surveys",
+      "progress": "Progress",
+      "createUser": "Create user",
+      "manageUsers": "Manage users"
+    },
+    "theme": {
+      "switchToLight": "Switch to light mode",
+      "switchToDark": "Switch to dark mode"
+    }
+  },
+  "protectedRoute": {
+    "loadingSession": "Loading session..."
+  },
+  "auth": {
+    "login": {
+      "subtitle": "Intern progress platform",
+      "footerText": "Don't have an account or forgot your password?",
+      "footerLink": "Contact your administrator.",
+      "activeSession": "Active session detected. Redirecting to your workspace.",
+      "emailLabel": "Email Address",
+      "passwordLabel": "Password",
+      "emailPlaceholder": "name@example.com",
+      "passwordPlaceholder": "••••••••",
+      "hidePassword": "Hide password",
+      "showPassword": "Show password",
+      "submit": "Log In",
+      "submitLoading": "Logging in..."
+    },
+    "validation": {
+      "emailInvalid": "Enter a valid email address",
+      "passwordMin": "Password must contain at least {{count}} characters"
+    }
+  },
+  "dashboard": {
+    "eyebrow": "Mentor Workspace",
+    "title": "Assigned interns",
+    "description": "Review progress snapshots, inspect latest criteria updates, and open intern cards for scoring.",
+    "metrics": {
+      "internsLabel": "Interns",
+      "internsHint": "Assigned to your portfolio",
+      "reviewsLabel": "Reviews",
+      "reviewsHint": "Submitted mentor assessments",
+      "avgLabel": "Average score",
+      "avgHint": "Across all recorded criterion scores"
+    },
+    "empty": {
+      "title": "No assignments yet",
+      "description": "No interns are assigned to this mentor yet. Ask an admin to attach interns to your profile."
+    },
+    "roster": {
+      "title": "Intern roster",
+      "subtitle": "Choose an intern card to continue with assessment and feedback.",
+      "openCard": "Open intern card",
+      "reviewsCount_one": "{{count}} review",
+      "reviewsCount_other": "{{count}} reviews",
+      "averageScore": "Average score",
+      "lastCriterion": "Last criterion",
+      "noReviewsYet": "No reviews yet"
+    }
+  },
+  "allInterns": {
+    "toasts": {
+      "addedTitle": "Intern added",
+      "addedDescription": "The intern has been successfully assigned to you.",
+      "errorTitle": "Error",
+      "errorDescription": "Failed to add intern. Please try again."
+    },
+    "error": {
+      "title": "Something went wrong",
+      "description": "Failed to load interns."
+    },
+    "header": {
+      "eyebrow": "All Interns",
+      "title": "Platform intern roster",
+      "description": "Browse every intern registered on the platform. Cards with an active profile show assessment progress and scoring history."
+    },
+    "metrics": {
+      "totalLabel": "Total interns",
+      "totalHint": "Registered with INTERN role",
+      "withProfileLabel": "With profile",
+      "withProfileHint": "Have an active intern profile",
+      "withoutProfileLabel": "Without profile",
+      "withoutProfileHint": "No profile attached yet",
+      "assessmentsLabel": "Total assessments",
+      "assessmentsHint": "Across all profiles"
+    },
+    "empty": {
+      "title": "No interns yet",
+      "description": "No interns found in the system. Ask an admin to create intern accounts."
+    },
+    "list": {
+      "title": "All interns",
+      "subtitle": "Interns without a profile are not yet assigned to a mentor.",
+      "averageScore": "Average score",
+      "lastCriterion": "Last criterion",
+      "noReviewsYet": "No reviews yet",
+      "noProfile": "No profile",
+      "profileNotAssigned": "Profile not assigned",
+      "reviewsCount_one": "{{count}} review",
+      "reviewsCount_other": "{{count}} reviews",
+      "ctaUnassigned": "Add intern",
+      "ctaAssignedYou": "Assigned to you",
+      "ctaAssignedOther": "Assigned to another mentor"
+    }
+  },
+  "mentorIntern": {
+    "error": {
+      "title": "Intern data is unavailable",
+      "description": "The review workspace could not load this intern. Return to the mentor dashboard and try again."
+    },
+    "breadcrumb": {
+      "interns": "Interns"
+    },
+    "stats": {
+      "assessments": "Assessments",
+      "criteria": "Criteria",
+      "avgScore": "Avg Score"
+    },
+    "skills": {
+      "title": "Skill Assessment",
+      "recentEntries": "Recent Entries"
+    },
+    "performance": {
+      "title": "Overall Performance",
+      "subtitle": "Mentor feedback & strategic notes",
+      "globalRating": "Global Rating",
+      "newAssessment": "New Assessment",
+      "criterion": "Criterion",
+      "score": "Score",
+      "max": "max {{count}}",
+      "percentOfMax": "{{count}}% of max",
+      "mentorNotes": "Mentor notes",
+      "notesPlaceholder": "Growth areas, achievements, future potential...",
+      "submit": "Submit Assessment",
+      "saving": "Saving…",
+      "saveErrorTitle": "Assessment save failed",
+      "historyTitle": "Recent Assessments",
+      "historyEmptyTitle": "No assessment history",
+      "historyEmptyDescription": "No assessments yet. Submit the first review from the left panel."
+    }
+  },
+  "me": {
+    "loadingProfile": "Loading profile...",
+    "breadcrumbs": {
+      "interns": "Interns"
+    },
+    "fallback": {
+      "noName": "No Name",
+      "noEmail": "No Email",
+      "noFeedback": "No feedback yet"
+    },
+    "metrics": {
+      "avgLabel": "Average score",
+      "avgHint": "Across all criterion reviews",
+      "reviewsLabel": "Total reviews",
+      "reviewsHint": "Submitted by your mentor",
+      "lastUpdateLabel": "Last update",
+      "lastUpdateHint": "Most recent mentor update"
+    },
+    "skills": {
+      "title": "Skill Assessment",
+      "expert": "Expert Proficiency",
+      "active": "Active Collaborator",
+      "defaultComment": "Consistent quality and performance in this area."
+    },
+    "monthly": {
+      "title": "Monthly Performance History",
+      "globalRating": "Global Rating",
+      "notesTitle": "Mentor's Monthly Strategic Notes",
+      "scoreLabel": "Score:",
+      "emptyComment": "Mentor has not provided a summary for this month.",
+      "emptyState": "Waiting for the first monthly review..."
+    },
+    "leaderboard": {
+      "title": "Leaderboard",
+      "subtitle": "Real-time intern rankings based on AVG.",
+      "rank": "Rank",
+      "intern": "Intern",
+      "reviews": "Reviews",
+      "avgScore": "Avg score",
+      "you": "You"
+    }
+  },
+  "settings": {
+    "page": {
+      "eyebrow": "Profile",
+      "title": "Settings",
+      "description": "Manage your account avatar and phone."
+    },
+    "card": {
+      "title": "Profile preferences",
+      "description": "Changes are applied after you submit the form."
+    },
+    "fields": {
+      "fullName": "Full name",
+      "email": "Email",
+      "role": "Role",
+      "phone": "Phone",
+      "phonePlaceholder": "+998901234567"
+    },
+    "photo": {
+      "hint": "Formats: JPEG, PNG, WebP. Max 5MB.",
+      "selectedFile": "Selected file: {{fileName}}"
+    },
+    "actions": {
+      "uploadPhoto": "Upload photo",
+      "removePhoto": "Remove photo",
+      "cancelRemovePhoto": "Cancel removal",
+      "save": "Save",
+      "saving": "Saving…",
+      "retry": "Retry"
+    },
+    "validation": {
+      "phoneE164": "Enter phone in E.164 format (for example, +998901234567).",
+      "photoType": "Only JPEG, PNG, or WebP files are allowed.",
+      "photoSize": "File size must be 5MB or less.",
+      "photoProcessedSize": "Cropped file is larger than 5MB. Reduce zoom or choose another image."
+    },
+    "editor": {
+      "title": "Avatar editor",
+      "description": "Drag the image and adjust zoom before saving.",
+      "imageAlt": "Editable avatar preview",
+      "dragHint": "Drag the image inside the square to choose the visible area.",
+      "zoomLabel": "Zoom",
+      "previewLabel": "Preview",
+      "cancel": "Cancel",
+      "apply": "Apply",
+      "applying": "Applying…",
+      "processError": "Unable to process image. Please choose another file."
+    },
+    "state": {
+      "loadingTitle": "Loading settings",
+      "loadingDescription": "Please wait while profile settings are loading.",
+      "errorTitle": "Failed to load settings",
+      "errorDescription": "Try refreshing the page or retry later.",
+      "saveErrorTitle": "Failed to save settings"
+    }
+  },
+  "admin": {
+    "common": {
+      "control": "Admin control",
+      "role": "Role",
+      "mentor": "Mentor",
+      "assignedMentor": "Assigned mentor",
+      "selectMentor": "Select mentor",
+      "saveChanges": "Save changes",
+      "deleteUser": "Delete user",
+      "notAssigned": "Not assigned",
+      "notApplicable": "Not applicable",
+      "linked": "Linked",
+      "standalone": "Standalone",
+      "editCard": "Edit card"
+    },
+    "createUserPage": {
+      "title": "Create user",
+      "description": "Provision new accounts and attach interns to a mentor during creation."
+    },
+    "manageUsersPage": {
+      "title": "Manage users",
+      "description": "Review assigned mentors, edit display details, and keep role ownership clean."
+    },
+    "surveysPage": {
+      "title": "Surveys",
+      "description": "Create surveys for mentors and interns. View responses after submission."
+    },
+    "users": {
+      "panelEmptyTitle": "No users found",
+      "panelEmptyDescription": "There are no users to manage yet.",
+      "panelErrorTitle": "User list failed to load",
+      "tableAria": "Users list",
+      "columns": {
+        "user": "User",
+        "role": "Role",
+        "mentor": "Mentor",
+        "status": "Status"
+      }
+    },
+    "createForm": {
+      "fullName": "Full name",
+      "email": "Email",
+      "password": "Password",
+      "hidePassword": "Hide password",
+      "showPassword": "Show password",
+      "submit": "Create user",
+      "errorTitle": "User creation failed",
+      "validation": {
+        "fullNameRequired": "Full name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Enter a valid email address",
+        "passwordRequired": "Password is required",
+        "passwordMin": "Password must be at least 8 characters"
+      }
+    },
+    "setupCard": {
+      "title": "Account setup guide",
+      "subtitle": "Role determines what the user can do and whether a mentor is required.",
+      "rules": {
+        "intern": "Requires an assigned mentor. Select one from the dropdown after choosing the Intern role.",
+        "mentor": "No mentor assignment needed. Will appear in the mentor list for intern assignment.",
+        "admin": "Full system access. No mentor assignment. Use with caution."
+      },
+      "notes": {
+        "email": "Email cannot be changed after creation.",
+        "roleMentor": "Role and mentor can be updated later in Manage Users.",
+        "password": "Password must be set at creation time."
+      }
+    },
+    "surveys": {
+      "createForm": {
+        "surveyTitle": "Survey title",
+        "targetRole": "Target role",
+        "criteria": "Criteria",
+        "criterion": "Criterion {{count}}",
+        "required": "Required",
+        "addCriterion": "+ Add criterion",
+        "removeCriterion": "Remove criterion",
+        "submit": "Create survey",
+        "titleRequired": "Title is required",
+        "errorTitle": "Failed to create survey"
+      },
+      "list": {
+        "loadingSurveys": "Loading surveys…",
+        "noSurveysTitle": "No surveys",
+        "noSurveysDescription": "No surveys created yet.",
+        "mentor": "Mentor",
+        "intern": "Intern",
+        "criteriaCount_one": "{{count}} criterion",
+        "criteriaCount_other": "{{count}} criteria",
+        "fieldsCount_one": "{{count}} field",
+        "fieldsCount_other": "{{count}} fields",
+        "responsesCount_one": "{{count}} response",
+        "responsesCount_other": "{{count}} responses",
+        "viewResponses": "View responses",
+        "hideResponses": "Hide responses",
+        "delete": "Delete",
+        "loadingResponses": "Loading responses…",
+        "noResponsesTitle": "No responses",
+        "noResponsesDescription": "No responses yet.",
+        "mentorPrefix": "Mentor: {{name}}",
+        "emptyAnswer": "—"
+      }
+    }
+  },
+  "surveys": {
+    "page": {
+      "eyebrow": "Surveys",
+      "title": "My surveys",
+      "description": "Complete the surveys assigned to you."
+    },
+    "list": {
+      "loading": "Loading surveys…",
+      "emptyTitle": "No surveys",
+      "emptyDescription": "No surveys have been assigned to you yet.",
+      "criteriaCount_one": "{{count}} criterion to rate",
+      "criteriaCount_other": "{{count}} criteria to rate",
+      "completed": "Completed",
+      "pending": "Pending",
+      "fillOut": "Fill out"
+    },
+    "fill": {
+      "eyebrow": "Surveys",
+      "title": "Fill out survey",
+      "description": "Please fill out all fields and submit.",
+      "submit": "Submit survey",
+      "loading": "Loading…",
+      "notFoundTitle": "Not found",
+      "notFoundDescription": "Survey not found or not available for your role.",
+      "alreadyCompletedTitle": "Already completed",
+      "alreadyCompletedDescription": "You have already submitted this survey.",
+      "emptySurveyTitle": "Empty survey",
+      "emptySurveyDescription": "This survey has no questions.",
+      "ratingLabel": "Rating",
+      "ratingRequired": "Rating is required",
+      "commentLabel": "Comment",
+      "commentPlaceholder": "Write your comment…",
+      "commentRequired": "Comment is required",
+      "submitErrorTitle": "Submission failed",
+      "completionProgress": "Completion progress",
+      "answeredOf": "{{completed}} of {{total}} answered",
+      "done": "Done"
+    }
+  },
+  "toasts": {
+    "userCreated": "User created successfully",
+    "userUpdated": "User updated successfully",
+    "userDeleted": "User deleted successfully",
+    "surveyCreated": "Survey created",
+    "surveyDeleted": "Survey deleted",
+    "surveySubmitted": "Survey submitted",
+    "settingsUpdated": "Settings saved successfully"
+  },
+  "api": {
+    "requestFailed": "Request failed"
+  }
+}

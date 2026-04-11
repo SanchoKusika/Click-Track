@@ -1,0 +1,355 @@
+@import 'tailwindcss';
+
+/* 1. ГЛАВНЫЙ КОНТЕЙНЕР: Теперь на всю ширину, без лишних пустот по бокам */
+.pageWrapper {
+  @apply w-full space-y-6;
+}
+
+.loading {
+  color: var(--muted);
+  @apply p-10 text-center;
+}
+
+.starsContainer {
+  @apply flex gap-0.5;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+  @apply flex items-center gap-2 text-sm mb-4;
+}
+
+.breadcrumbSeparator {
+  color: var(--muted);
+  @apply text-[10px] font-bold;
+}
+
+.breadcrumbCurrent {
+  color: var(--primary);
+  @apply font-semibold;
+}
+
+/* Grid Layouts: Исправляем пропорции под широкий формат */
+.metricsGrid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-4 w-full;
+}
+
+.mainGrid {
+  @apply grid grid-cols-1 lg:grid-cols-12 gap-6 w-full;
+}
+
+.contentColumn {
+  @apply lg:col-span-8 space-y-6;
+}
+
+.sidebarColumn {
+  @apply lg:col-span-4 space-y-6;
+}
+
+/* Cards & Headers: Паддинги p-6 как в Dashboard */
+.metricCardCustom {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  @apply rounded-[20px] p-6 shadow-sm;
+}
+
+.cardPadding {
+  @apply p-6;
+}
+
+.skillAssessmentCard {
+  border: 1px solid var(--border);
+  @apply p-6 rounded-[20px];
+}
+
+.cardHeaderFlex {
+  @apply flex gap-3 items-center pb-6;
+}
+
+.cardHeaderBetween {
+  @apply flex justify-between items-center pb-6 gap-5;
+}
+
+.iconWrapper {
+  background-color: var(--primary-soft);
+  color: var(--primary);
+  @apply p-2 rounded-lg;
+}
+
+.cardTitle {
+  color: var(--text);
+  @apply text-xl font-bold;
+}
+
+.cardSubtitle {
+  color: var(--muted);
+  @apply text-xs mt-1 italic;
+}
+
+.cardContentNoTop {
+  @apply space-y-4;
+}
+
+/* Skills Grid */
+.skillsGrid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8;
+}
+
+.skillItem {
+  @apply space-y-3 p-5 bg-(--surface) rounded-xl border border-(--border) shadow-sm;
+}
+
+.skillHeader {
+  @apply flex justify-between items-end;
+}
+
+.criterionTitle {
+  color: var(--text);
+  @apply font-bold leading-none;
+}
+
+.proficiencyLabel {
+  color: var(--primary);
+  @apply text-[12px] font-semibold;
+}
+
+.assessmentComment {
+  color: var(--muted);
+  @apply text-[13px] leading-relaxed italic;
+}
+
+/* Monthly Assessments */
+.cardContentMonthly {
+  @apply space-y-6;
+}
+
+.globalRatingBadge {
+  background-color: var(--surface-soft);
+  border: 1px solid var(--border);
+  @apply flex items-center gap-3 px-4 py-2 rounded-full;
+}
+
+.badgeLabel {
+  color: var(--primary);
+  @apply text-[10px] font-bold uppercase tracking-widest;
+}
+
+.mentorNotesTitle {
+  color: var(--muted);
+  @apply text-[11px] font-bold uppercase tracking-wider;
+}
+
+.assessmentList {
+  @apply space-y-4;
+}
+
+.monthlyCard {
+  border: 1px solid var(--border);
+  @apply p-5 rounded-2xl transition-all;
+}
+
+.monthlyCardActive {
+  background-color: var(--surface-soft);
+  border-color: var(--primary);
+}
+
+.monthlyCardInactive {
+  background-color: var(--surface);
+  @apply opacity-80;
+}
+
+.monthlyHeader {
+  @apply flex justify-between items-start mb-3;
+}
+
+.monthlyDate {
+  color: var(--primary);
+  @apply text-[12px] font-black uppercase tracking-tight;
+}
+
+.monthlyScore {
+  @apply flex items-center gap-2;
+}
+
+.scoreLabel {
+  color: var(--muted);
+  @apply text-[11px] font-bold uppercase tracking-tighter;
+}
+
+.scoreValue {
+  color: var(--text);
+  @apply text-sm font-black;
+}
+
+.monthlyComment {
+  color: var(--text);
+  @apply text-[14px] leading-relaxed italic opacity-90;
+}
+
+.emptyState {
+  border: 1px dashed var(--border);
+  color: var(--muted);
+  @apply w-full min-h-[140px] flex items-center justify-center rounded-2xl italic font-mono text-[13px];
+}
+
+/* Leaderboard: */
+.leaderboardCard {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  @apply overflow-hidden rounded-[20px] w-full;
+}
+
+.leaderboardHeader {
+  @apply p-6 pb-2;
+}
+
+.leaderboardTable {
+  @apply w-full;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.tableHeader {
+  background-color: var(--surface-soft);
+}
+
+.tableHeaderCell:first-child {
+  border-top-left-radius: 20px;
+}
+
+.tableHeaderCellRight {
+  border-top-right-radius: 20px;
+  @apply text-right px-6 italic;
+}
+
+.tableHeaderCell,
+.tableHeaderCellCenter,
+.tableHeaderCellRight {
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  @apply px-6 py-4 text-[10px] font-bold uppercase;
+}
+
+.tableHeaderCellCenter {
+  @apply text-center;
+}
+
+.tableBody {
+  background-color: var(--surface);
+}
+
+.tableRow {
+  @apply transition-all duration-200 relative;
+}
+
+.tableRow td {
+  border-bottom: 1px solid var(--border);
+}
+
+.tableRow:last-child td {
+  border-bottom: none;
+}
+
+.tableRow:last-child td:first-child {
+  border-bottom-left-radius: 20px;
+}
+
+.tableRow:last-child td:last-child {
+  border-bottom-right-radius: 20px;
+}
+
+.tableCell,
+.tableCellRelative {
+  @apply px-6 py-4;
+}
+
+.tableCellCenter {
+  color: var(--muted);
+  @apply px-4 py-4 text-center text-[13px] font-bold font-mono;
+}
+
+.tableCellRight {
+  @apply px-6 py-4 text-right;
+}
+
+/* Ранги (полный код классических цветов) */
+
+.rowFirst {
+  background-color: rgba(255, 191, 0, 0.18);
+}
+:global(.dark) .rowFirst {
+  background-color: rgba(255, 191, 0, 0.12);
+}
+.rowFirst .rankText {
+  color: #b45309;
+}
+:global(.dark) .rowFirst .rankText {
+  color: #fbbf24;
+}
+
+.rowSecond {
+  background-color: rgba(148, 163, 184, 0.18);
+}
+:global(.dark) .rowSecond {
+  background-color: rgba(148, 163, 184, 0.15);
+}
+.rowSecond .rankText {
+  color: #475569;
+}
+:global(.dark) .rowSecond .rankText {
+  color: #cbd5e1;
+}
+
+.rowThird {
+  background-color: rgba(180, 83, 9, 0.15);
+}
+:global(.dark) .rowThird {
+  background-color: rgba(180, 83, 9, 0.12);
+}
+.rowThird .rankText {
+  color: #92400e;
+}
+:global(.dark) .rowThird .rankText {
+  color: #f97316;
+}
+
+.rowMe {
+  background-color: var(--primary-soft);
+}
+
+.rowDefault {
+  @apply hover:bg-[var(--surface-soft)];
+}
+
+.meIndicator {
+  background-color: var(--primary);
+  @apply absolute left-0 top-0 bottom-0 w-[4px] shadow-[2px_0_10px_rgba(0,119,255,0.3)] rounded-r-sm;
+}
+
+.rankText {
+  @apply text-[13px] font-black italic;
+}
+
+.internNameWrapper {
+  @apply flex items-center gap-2;
+}
+
+.internNameMe {
+  color: var(--primary);
+  @apply text-[13px] font-bold;
+}
+
+.internNameDefault {
+  color: var(--text);
+  @apply text-[13px] font-bold;
+}
+
+.youBadge {
+  background-color: var(--primary);
+  @apply text-[9px] text-white px-1.5 py-0.5 rounded-sm font-black uppercase tracking-tighter;
+}
+
+.scoreText {
+  @apply text-[14px] font-black tabular-nums;
+}

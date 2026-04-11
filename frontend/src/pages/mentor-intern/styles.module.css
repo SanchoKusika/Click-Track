@@ -1,0 +1,447 @@
+@import 'tailwindcss';
+
+@keyframes pageFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes historyIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page {
+  @apply flex flex-col gap-6;
+  animation: pageFade 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.skeletonStack {
+  @apply flex flex-col gap-4 p-9;
+}
+.skeletonBreadcrumb {
+  @apply h-3 w-40 rounded-full;
+  background: var(--bg);
+}
+.skeletonHeader {
+  @apply h-20 w-full rounded-2xl;
+  background: var(--bg);
+}
+.skeletonSection {
+  @apply h-52 w-full rounded-2xl;
+  background: var(--bg);
+}
+
+.breadcrumb {
+  @apply flex items-center gap-2;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+}
+
+.breadcrumbLink {
+  @apply no-underline transition-colors duration-150;
+  color: var(--muted);
+}
+.breadcrumbLink:hover {
+  color: var(--primary);
+}
+
+.breadcrumbSep {
+  opacity: 0.3;
+}
+.breadcrumbCurrent {
+  color: var(--text);
+}
+
+.header {
+  @apply rounded-[20px] border border-(--border) bg-(--surface) p-8 shadow-[0_8px_32px_-18px_rgba(0,0,0,0.2)];
+}
+
+.headerGlow {
+  position: absolute;
+  top: -40px;
+  left: -40px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+  opacity: 0.07;
+  pointer-events: none;
+}
+
+.headerInner {
+  @apply relative flex flex-wrap items-center gap-8;
+}
+
+.avatar {
+  @apply shrink-0 rounded-full bg-(--primary-soft) text-(--primary) border-0;
+  width: 64px !important;
+  height: 64px !important;
+  font-size: 24px !important;
+}
+
+.headerMeta {
+  @apply flex-1 min-w-0;
+}
+
+.headerName {
+  @apply mt-1 text-[34px] leading-none font-semibold text-(--text) tracking-tight;
+}
+
+.headerEmail {
+  @apply mt-3 text-base text-(--muted);
+}
+
+.headerStats {
+  @apply flex items-center overflow-hidden ml-auto bg-(--bg) border border-(--border) rounded-2xl;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.headerStat {
+  @apply flex flex-col items-center px-6 py-3;
+  gap: 2px;
+}
+
+.headerStatValue {
+  @apply text-xl font-semibold text-(--text) leading-none tracking-tight tabular-nums;
+}
+
+.headerStatLabel {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.headerStatDivider {
+  width: 0.5px;
+  height: 28px;
+  flex-shrink: 0;
+  background: var(--border);
+}
+
+@media (max-width: 800px) {
+  .headerStats {
+    display: none;
+  }
+}
+
+.skillsGrid {
+  @apply grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 p-1 mt-4;
+}
+
+.skillCard {
+  @apply border border-(--border) bg-(--surface-soft) shadow-[0_6px_20px_-16px_rgba(0,0,0,0.3)] transition-all duration-200;
+  cursor: default;
+}
+
+.skillCard:hover {
+  @apply shadow-[0_12px_40px_-16px_rgba(0,0,0,0.4)] -translate-y-1;
+}
+
+.skillCardContent {
+  @apply gap-4 p-5 flex flex-col;
+}
+
+.skillHeader {
+  @apply flex items-start justify-between gap-3;
+}
+
+.skillTitle {
+  @apply truncate text-base font-semibold text-(--text);
+}
+
+.skillStats {
+  @apply space-y-3 rounded-2xl bg-(--surface) p-4;
+}
+
+.skillProgressTrack {
+  @apply h-1.5 rounded-full overflow-hidden bg-(--bg);
+}
+
+.skillProgressFill {
+  @apply h-full rounded-full transition-all duration-500;
+}
+
+.skillProgressFill--high {
+  @apply bg-green-500;
+}
+.skillProgressFill--mid {
+  @apply bg-amber-500;
+}
+.skillProgressFill--low {
+  @apply bg-red-500;
+}
+.skillProgressFill--none {
+  @apply bg-(--border);
+}
+
+.skillScoreRow {
+  @apply flex items-center justify-between gap-2;
+}
+
+.skillScoreText {
+  @apply text-3xl font-semibold tracking-tight text-(--text) tabular-nums;
+}
+
+.skillScoreMax {
+  @apply text-sm font-semibold text-(--muted) ml-0.5 tabular-nums;
+}
+
+.skillComment {
+  @apply m-0 p-3 rounded-xl bg-(--bg)/50 text-xs italic text-(--muted) leading-relaxed border border-(--border)/10;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.skillFooter {
+  @apply pt-2 px-1 flex items-center justify-between;
+}
+
+.skillFooterLabel {
+  @apply text-xs font-semibold uppercase tracking-[0.2em] text-(--muted);
+}
+
+.skillFooterValue {
+  @apply text-sm font-semibold text-(--text) tabular-nums;
+}
+
+.globalRating {
+  @apply flex flex-col items-end gap-1;
+}
+.globalRatingLabel {
+  @apply text-[10px] font-bold uppercase tracking-widest text-(--muted);
+}
+
+.performanceGrid {
+  @apply grid grid-cols-1 gap-6 lg:grid-cols-2;
+}
+
+.formCard {
+  @apply rounded-[20px] border border-(--border) bg-(--surface) shadow-[0_8px_24px_-18px_rgba(0,0,0,0.2)];
+  border-left: 4px solid var(--primary) !important;
+}
+
+.formContent {
+  @apply p-6;
+}
+
+.formHeading {
+  @apply flex items-center gap-3 mb-6 pb-4 border-b border-(--border);
+}
+
+.formHeadingIcon {
+  @apply text-(--primary) text-lg;
+}
+
+.formHeadingText {
+  @apply text-lg font-semibold text-(--text) m-0;
+  letter-spacing: -0.01em;
+}
+
+.form {
+  @apply flex flex-col gap-4;
+}
+
+.formRow {
+  @apply grid grid-cols-2 gap-3;
+}
+
+@media (max-width: 500px) {
+  .formRow {
+    @apply grid-cols-1;
+  }
+}
+
+.field {
+  @apply flex flex-col gap-2;
+}
+
+.fieldLabel {
+  @apply flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-(--muted);
+}
+
+.fieldLabelHint {
+  @apply px-2 py-0.5 rounded-md text-[9px] font-bold bg-(--primary-soft) text-(--primary) border border-(--primary)/20;
+}
+
+.select,
+.input,
+.textarea {
+  @apply w-full rounded-xl border border-(--border) px-4 py-2.5 text-sm transition-all duration-200 bg-(--bg) text-(--text) outline-none;
+}
+
+.select {
+  @apply cursor-pointer pr-10 appearance-none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath stroke='%236f7fa3' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' fill='none' d='M3 5l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+.select:hover,
+.input:hover,
+.textarea:hover {
+  @apply border-(--muted)/40 bg-(--surface-soft);
+}
+
+.select:focus,
+.input:focus,
+.textarea:focus {
+  @apply border-(--primary) bg-(--surface-soft) shadow-[0_0_0_4px_rgba(31,115,255,0.1)];
+}
+
+.scorePreview {
+  @apply relative flex items-center h-8 overflow-hidden rounded-xl border border-(--border) bg-(--bg);
+}
+
+.scorePreviewFill {
+  @apply absolute inset-y-0 left-0 bg-(--primary-soft) border-r border-(--primary)/20 transition-all duration-500;
+}
+
+.scorePreviewLabel {
+  @apply relative z-10 px-3 text-[11px] font-bold text-(--primary);
+}
+
+.textarea {
+  @apply min-h-[100px] leading-relaxed;
+}
+
+.submitBtn {
+  @apply w-full border-none rounded-xl py-3 text-sm font-bold bg-(--primary) text-white cursor-pointer transition-all duration-200 shadow-[0_4px_12px_rgba(31,115,255,0.3)];
+}
+
+.submitBtn:hover:not(:disabled) {
+  @apply filter brightness-110 -translate-y-0.5 shadow-[0_8px_20px_rgba(31,115,255,0.4)];
+}
+
+.submitBtn:active:not(:disabled) {
+  @apply translate-y-0 scale-[0.98];
+}
+
+.historyCard {
+  @apply rounded-[20px] border border-(--border) bg-(--surface) shadow-[0_8px_24px_-18px_rgba(0,0,0,0.2)];
+}
+
+.historyContent {
+  @apply flex flex-col gap-5 p-6;
+}
+
+.historyHead {
+  @apply flex items-center justify-between pb-4 border-b border-(--border);
+}
+
+.historyHeadTitle {
+  @apply text-base font-semibold text-(--text) m-0;
+}
+.historyHeadSubtitle {
+  @apply text-xs font-semibold uppercase tracking-[0.2em] text-(--muted);
+}
+
+.historyCount {
+  @apply text-[11px] font-semibold px-3 py-1 rounded-full bg-(--primary-soft) text-(--primary) border border-(--primary)/20 tabular-nums;
+}
+
+.historyList {
+  @apply m-0 p-0 list-none flex flex-col gap-3 overflow-y-auto max-h-[450px];
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.historyItem {
+  @apply rounded-2xl border border-(--border) bg-(--surface-soft) transition-all duration-200;
+  animation: historyIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.historyItem:hover {
+  @apply border-(--muted)/30 bg-(--surface) shadow-[0_4px_12px_rgba(0,0,0,0.1)];
+}
+
+.historyItemInner {
+  @apply flex flex-col gap-3 p-4;
+}
+
+.historyItemRow {
+  @apply flex items-center justify-between gap-2;
+}
+
+.historyItemTitle {
+  @apply text-sm font-semibold text-(--text) leading-snug;
+}
+
+.historyScore {
+  @apply flex-shrink-0 text-sm font-semibold tabular-nums;
+}
+
+.historyScoreMax {
+  @apply text-[10px] opacity-40 ml-0.5;
+}
+
+.historyScore--high {
+  @apply text-green-600;
+}
+.historyScore--mid {
+  @apply text-amber-600;
+}
+.historyScore--low {
+  @apply text-red-600;
+}
+.historyScore--none {
+  @apply text-(--muted);
+}
+
+.historyProgressTrack {
+  @apply h-1 rounded-full overflow-hidden bg-(--border);
+}
+
+.historyProgressFill {
+  @apply h-full rounded-full transition-all duration-500;
+}
+
+.historyProgressFill--high {
+  @apply bg-green-500;
+}
+.historyProgressFill--mid {
+  @apply bg-amber-500;
+}
+.historyProgressFill--low {
+  @apply bg-red-500;
+}
+.historyProgressFill--none {
+  @apply bg-(--muted);
+}
+
+.historyMeta {
+  @apply flex items-center gap-2 text-[11px] text-(--muted) font-medium;
+}
+
+.historyDate {
+  @apply font-medium;
+}
+
+.historyMetaDot {
+  @apply w-1 h-1 rounded-full bg-current opacity-30;
+}
+
+.historyMentor {
+  @apply font-semibold text-(--text);
+}
+
+.historyComment {
+  @apply mt-1 p-3 rounded-xl bg-(--bg) border border-(--border) text-xs italic text-(--muted) leading-relaxed;
+}

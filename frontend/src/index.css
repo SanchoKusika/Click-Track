@@ -1,0 +1,51 @@
+@import 'tailwindcss';
+@import '@heroui/styles/css';
+
+:root,
+.light {
+  color-scheme: light;
+  --bg: #f2f5fb;
+  --sidebar: #e9eef5;
+  --surface: #ffffff;
+  --surface-soft: #edf3ff;
+  --border: #d8e1ef;
+  --text: #27314f;
+  --muted: #6f7fa3;
+  --primary: #1f73ff;
+  --primary-soft: #dee9ff;
+}
+
+.dark {
+  color-scheme: dark;
+  --bg: #0f1117;
+  --sidebar: #161b27;
+  --surface: #1c2333;
+  --surface-soft: #1e2a40;
+  --border: #2a3347;
+  --text: #e8ecf4;
+  --muted: #8392b0;
+  --primary: #4d8eff;
+  --primary-soft: #1a2d4d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

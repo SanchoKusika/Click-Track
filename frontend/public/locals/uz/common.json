@@ -1,0 +1,434 @@
+{
+  "language": {
+    "label": "Til",
+    "ru": "RU",
+    "en": "EN",
+    "uz": "UZ"
+  },
+  "roles": {
+    "mentor": "Mentor",
+    "admin": "Administrator",
+    "intern": "Stajyor",
+    "none": "Rolsiz",
+    "guest": "mehmon",
+    "byCode": {
+      "ADMIN": "Admin",
+      "MENTOR": "Mentor",
+      "INTERN": "Stajyor"
+    }
+  },
+  "layout": {
+    "brandTitle": "Click Track",
+    "brandLogoAlt": "Click Track logotipi",
+    "support": "Yordam",
+    "logout": "Chiqish",
+    "openSettings": "Sozlamalarni ochish",
+    "titles": {
+      "allInterns": "Barcha stajyorlar",
+      "interns": "Stajyorlar",
+      "overview": "Umumiy ko'rinish",
+      "myProgress": "Mening progressim",
+      "settings": "Sozlamalar",
+      "createUser": "Foydalanuvchi yaratish",
+      "manageUsers": "Foydalanuvchilarni boshqarish",
+      "surveys": "So'rovnomalar",
+      "workspace": "Ish maydoni"
+    },
+    "nav": {
+      "dashboard": "Panel",
+      "allInterns": "Barcha stajyorlar",
+      "surveys": "So'rovnomalar",
+      "progress": "Progress",
+      "createUser": "Foydalanuvchi yaratish",
+      "manageUsers": "Foydalanuvchilarni boshqarish"
+    },
+    "theme": {
+      "switchToLight": "Yorug' rejimga o'tish",
+      "switchToDark": "Qorong'i rejimga o'tish"
+    }
+  },
+  "protectedRoute": {
+    "loadingSession": "Sessiya yuklanmoqda..."
+  },
+  "auth": {
+    "login": {
+      "subtitle": "Stajyorlar progressi platformasi",
+      "footerText": "Hisob yo'qmi yoki parol esdan chiqdimi?",
+      "footerLink": "Administrator bilan bog'laning.",
+      "activeSession": "Faol sessiya aniqlandi. Ish maydoniga yo'naltirilmoqda.",
+      "emailLabel": "Email manzil",
+      "passwordLabel": "Parol",
+      "emailPlaceholder": "name@example.com",
+      "passwordPlaceholder": "••••••••",
+      "hidePassword": "Parolni yashirish",
+      "showPassword": "Parolni ko'rsatish",
+      "submit": "Kirish",
+      "submitLoading": "Kirilmoqda..."
+    },
+    "validation": {
+      "emailInvalid": "To'g'ri email kiriting",
+      "passwordMin": "Parol kamida {{count}} ta belgidan iborat bo'lishi kerak"
+    }
+  },
+  "dashboard": {
+    "eyebrow": "Mentor ish maydoni",
+    "title": "Biriktirilgan stajyorlar",
+    "description": "Progress holatini ko'ring, mezonlar bo'yicha so'nggi yangilanishlarni tekshiring va stajyor kartalarini ochib baholang.",
+    "metrics": {
+      "internsLabel": "Stajyorlar",
+      "internsHint": "Sizning portfelingizga biriktirilgan",
+      "reviewsLabel": "Baholar",
+      "reviewsHint": "Mentor yuborgan baholar",
+      "avgLabel": "O'rtacha ball",
+      "avgHint": "Barcha mezon ballari bo'yicha"
+    },
+    "empty": {
+      "title": "Hozircha biriktirish yo'q",
+      "description": "Bu mentorga hali stajyor biriktirilmagan. Profilingizga stajyor biriktirishni administratordan so'rang."
+    },
+    "roster": {
+      "title": "Stajyorlar ro'yxati",
+      "subtitle": "Baholash va fikr bildirishni davom ettirish uchun stajyor kartasini tanlang.",
+      "openCard": "Stajyor kartasini ochish",
+      "reviewsCount_one": "{{count}} baho",
+      "reviewsCount_other": "{{count}} baho",
+      "averageScore": "O'rtacha ball",
+      "lastCriterion": "Oxirgi mezon",
+      "noReviewsYet": "Hali baho yo'q"
+    }
+  },
+  "allInterns": {
+    "toasts": {
+      "addedTitle": "Stajyor qo'shildi",
+      "addedDescription": "Stajyor sizga muvaffaqiyatli biriktirildi.",
+      "errorTitle": "Xatolik",
+      "errorDescription": "Stajyorni qo'shib bo'lmadi. Qayta urinib ko'ring."
+    },
+    "error": {
+      "title": "Xatolik yuz berdi",
+      "description": "Stajyorlar ro'yxatini yuklab bo'lmadi."
+    },
+    "header": {
+      "eyebrow": "Barcha stajyorlar",
+      "title": "Platformadagi stajyorlar ro'yxati",
+      "description": "Platformada ro'yxatdan o'tgan barcha stajyorlarni ko'ring. Faol profilli kartalarda baholash progressi ko'rinadi."
+    },
+    "metrics": {
+      "totalLabel": "Jami stajyorlar",
+      "totalHint": "INTERN roli bilan ro'yxatdan o'tgan",
+      "withProfileLabel": "Profil bilan",
+      "withProfileHint": "Faol stajyor profiliga ega",
+      "withoutProfileLabel": "Profilsiz",
+      "withoutProfileHint": "Hali profil biriktirilmagan",
+      "assessmentsLabel": "Jami baholar",
+      "assessmentsHint": "Barcha profillar bo'yicha"
+    },
+    "empty": {
+      "title": "Hali stajyorlar yo'q",
+      "description": "Tizimda stajyor topilmadi. Administratordan stajyor akkauntlari yaratishni so'rang."
+    },
+    "list": {
+      "title": "Barcha stajyorlar",
+      "subtitle": "Profili yo'q stajyorlar hali mentorga biriktirilmagan.",
+      "averageScore": "O'rtacha ball",
+      "lastCriterion": "Oxirgi mezon",
+      "noReviewsYet": "Hali baho yo'q",
+      "noProfile": "Profil yo'q",
+      "profileNotAssigned": "Profil biriktirilmagan",
+      "reviewsCount_one": "{{count}} baho",
+      "reviewsCount_other": "{{count}} baho",
+      "ctaUnassigned": "Stajyor qo'shish",
+      "ctaAssignedYou": "Sizga biriktirilgan",
+      "ctaAssignedOther": "Boshqa mentorga biriktirilgan"
+    }
+  },
+  "mentorIntern": {
+    "error": {
+      "title": "Stajyor ma'lumotlari mavjud emas",
+      "description": "Baholash ish maydonini yuklab bo'lmadi. Mentor paneliga qaytib, qayta urinib ko'ring."
+    },
+    "breadcrumb": {
+      "interns": "Stajyorlar"
+    },
+    "stats": {
+      "assessments": "Baholar",
+      "criteria": "Mezonlar",
+      "avgScore": "O'rtacha ball"
+    },
+    "skills": {
+      "title": "Ko'nikmalar bahosi",
+      "recentEntries": "So'nggi yozuvlar"
+    },
+    "performance": {
+      "title": "Umumiy natija",
+      "subtitle": "Mentor fikrlari va strategik qaydlar",
+      "globalRating": "Global reyting",
+      "newAssessment": "Yangi baholash",
+      "criterion": "Mezon",
+      "score": "Ball",
+      "max": "maks {{count}}",
+      "percentOfMax": "Maksimumning {{count}}%",
+      "mentorNotes": "Mentor qaydlari",
+      "notesPlaceholder": "O'sish nuqtalari, yutuqlar, kelajak salohiyati...",
+      "submit": "Bahoni yuborish",
+      "saving": "Saqlanmoqda…",
+      "saveErrorTitle": "Bahoni saqlab bo'lmadi",
+      "historyTitle": "So'nggi baholar",
+      "historyEmptyTitle": "Baholash tarixi yo'q",
+      "historyEmptyDescription": "Hali baholar yo'q. Chap paneldan birinchi bahoni yuboring."
+    }
+  },
+  "me": {
+    "loadingProfile": "Profil yuklanmoqda...",
+    "breadcrumbs": {
+      "interns": "Stajyorlar"
+    },
+    "fallback": {
+      "noName": "Ism yo'q",
+      "noEmail": "Email yo'q",
+      "noFeedback": "Hali fikr yo'q"
+    },
+    "metrics": {
+      "avgLabel": "O'rtacha ball",
+      "avgHint": "Barcha mezon baholari bo'yicha",
+      "reviewsLabel": "Jami baholar",
+      "reviewsHint": "Mentoringiz tomonidan yuborilgan",
+      "lastUpdateLabel": "So'nggi yangilanish",
+      "lastUpdateHint": "Mentordan eng so'nggi yangilanish"
+    },
+    "skills": {
+      "title": "Ko'nikmalar bahosi",
+      "expert": "Ekspert daraja",
+      "active": "Faol ishtirokchi",
+      "defaultComment": "Ushbu yo'nalishda sifat va natija barqaror."
+    },
+    "monthly": {
+      "title": "Oylik natijalar tarixi",
+      "globalRating": "Global reyting",
+      "notesTitle": "Mentorning oylik strategik qaydlari",
+      "scoreLabel": "Ball:",
+      "emptyComment": "Bu oy uchun mentor umumiy izoh qoldirmagan.",
+      "emptyState": "Birinchi oylik ko'rib chiqish kutilmoqda..."
+    },
+    "leaderboard": {
+      "title": "Liderlar jadvali",
+      "subtitle": "AVG asosida real vaqt rejimidagi stajyor reytingi.",
+      "rank": "O'rin",
+      "intern": "Stajyor",
+      "reviews": "Baholar",
+      "avgScore": "O'rtacha ball",
+      "you": "Siz"
+    }
+  },
+  "settings": {
+    "page": {
+      "eyebrow": "Profil",
+      "title": "Sozlamalar",
+      "description": "Akkaunt avatari va telefonini boshqaring."
+    },
+    "card": {
+      "title": "Profil sozlamalari",
+      "description": "O'zgarishlar formani yuborgandan keyin saqlanadi."
+    },
+    "fields": {
+      "fullName": "To'liq ism",
+      "email": "Email",
+      "role": "Rol",
+      "phone": "Telefon",
+      "phonePlaceholder": "+998901234567"
+    },
+    "photo": {
+      "hint": "Formatlar: JPEG, PNG, WebP. Maksimal 5MB.",
+      "selectedFile": "Tanlangan fayl: {{fileName}}"
+    },
+    "actions": {
+      "uploadPhoto": "Rasm yuklash",
+      "removePhoto": "Rasmni o'chirish",
+      "cancelRemovePhoto": "O'chirishni bekor qilish",
+      "save": "Saqlash",
+      "saving": "Saqlanmoqda…",
+      "retry": "Qayta urinish"
+    },
+    "validation": {
+      "phoneE164": "Telefonni E.164 formatida kiriting (masalan, +998901234567).",
+      "photoType": "Faqat JPEG, PNG yoki WebP fayllariga ruxsat beriladi.",
+      "photoSize": "Fayl hajmi 5MB dan oshmasligi kerak.",
+      "photoProcessedSize": "Kesilgandan keyin fayl 5MB dan katta bo'ldi. Masshtabni kamaytiring yoki boshqa rasm tanlang."
+    },
+    "editor": {
+      "title": "Avatar tahrirlagichi",
+      "description": "Saqlashdan oldin rasmni suring va masshtabni sozlang.",
+      "imageAlt": "Tahrirlanayotgan avatar ko'rinishi",
+      "dragHint": "Ko'rinadigan sohani tanlash uchun rasmni kvadrat ichida suring.",
+      "zoomLabel": "Masshtab",
+      "previewLabel": "Ko'rinish",
+      "cancel": "Bekor qilish",
+      "apply": "Qo'llash",
+      "applying": "Qo'llanmoqda…",
+      "processError": "Rasmni qayta ishlab bo'lmadi. Boshqa fayl tanlang."
+    },
+    "state": {
+      "loadingTitle": "Sozlamalar yuklanmoqda",
+      "loadingDescription": "Profil sozlamalari yuklanmoqda, kuting.",
+      "errorTitle": "Sozlamalarni yuklab bo'lmadi",
+      "errorDescription": "Sahifani yangilang yoki keyinroq urinib ko'ring.",
+      "saveErrorTitle": "Sozlamalarni saqlab bo'lmadi"
+    }
+  },
+  "admin": {
+    "common": {
+      "control": "Admin boshqaruvi",
+      "role": "Rol",
+      "mentor": "Mentor",
+      "assignedMentor": "Biriktirilgan mentor",
+      "selectMentor": "Mentorni tanlang",
+      "saveChanges": "O'zgarishlarni saqlash",
+      "deleteUser": "Foydalanuvchini o'chirish",
+      "notAssigned": "Biriktirilmagan",
+      "notApplicable": "Qo'llanilmaydi",
+      "linked": "Bog'langan",
+      "standalone": "Mustaqil",
+      "editCard": "Tahrirlash kartasi"
+    },
+    "createUserPage": {
+      "title": "Foydalanuvchi yaratish",
+      "description": "Yangi akkauntlar yarating va yaratishda stajyorni mentorga biriktiring."
+    },
+    "manageUsersPage": {
+      "title": "Foydalanuvchilarni boshqarish",
+      "description": "Biriktirilgan mentorlarni ko'ring, ma'lumotlarni tahrirlang va rollar tartibini saqlang."
+    },
+    "surveysPage": {
+      "title": "So'rovnomalar",
+      "description": "Mentorlar va stajyorlar uchun so'rovnomalar yarating. Yuborilgandan keyin javoblarni ko'ring."
+    },
+    "users": {
+      "panelEmptyTitle": "Foydalanuvchilar topilmadi",
+      "panelEmptyDescription": "Hozircha boshqarish uchun foydalanuvchilar yo'q.",
+      "panelErrorTitle": "Foydalanuvchilar ro'yxatini yuklab bo'lmadi",
+      "tableAria": "Foydalanuvchilar ro'yxati",
+      "columns": {
+        "user": "Foydalanuvchi",
+        "role": "Rol",
+        "mentor": "Mentor",
+        "status": "Holat"
+      }
+    },
+    "createForm": {
+      "fullName": "To'liq ism",
+      "email": "Email",
+      "password": "Parol",
+      "hidePassword": "Parolni yashirish",
+      "showPassword": "Parolni ko'rsatish",
+      "submit": "Foydalanuvchi yaratish",
+      "errorTitle": "Foydalanuvchini yaratib bo'lmadi",
+      "validation": {
+        "fullNameRequired": "To'liq ism majburiy",
+        "emailRequired": "Email majburiy",
+        "emailInvalid": "To'g'ri email kiriting",
+        "passwordRequired": "Parol majburiy",
+        "passwordMin": "Parol kamida 8 ta belgidan iborat bo'lishi kerak"
+      }
+    },
+    "setupCard": {
+      "title": "Akkaunt sozlash qo'llanmasi",
+      "subtitle": "Rol foydalanuvchi imkoniyatlarini va mentor kerakligini belgilaydi.",
+      "rules": {
+        "intern": "Biriktirilgan mentor talab qilinadi. Stajyor rolini tanlagach, ro'yxatdan mentorni tanlang.",
+        "mentor": "Mentor biriktirish talab qilinmaydi. Stajyor biriktirish uchun mentorlar ro'yxatida ko'rinadi.",
+        "admin": "Tizimga to'liq kirish. Mentor biriktirish talab qilinmaydi. Ehtiyotkorlik bilan ishlating."
+      },
+      "notes": {
+        "email": "Yaratilgandan keyin emailni o'zgartirib bo'lmaydi.",
+        "roleMentor": "Rol va mentor keyinroq foydalanuvchilar boshqaruvida o'zgartirilishi mumkin.",
+        "password": "Parol yaratish vaqtida o'rnatilishi kerak."
+      }
+    },
+    "surveys": {
+      "createForm": {
+        "surveyTitle": "So'rovnoma nomi",
+        "targetRole": "Maqsadli rol",
+        "criteria": "Mezonlar",
+        "criterion": "Mezon {{count}}",
+        "required": "Majburiy",
+        "addCriterion": "+ Mezon qo'shish",
+        "removeCriterion": "Mezonni o'chirish",
+        "submit": "So'rovnoma yaratish",
+        "titleRequired": "Nom majburiy",
+        "errorTitle": "So'rovnoma yaratib bo'lmadi"
+      },
+      "list": {
+        "loadingSurveys": "So'rovnomalar yuklanmoqda…",
+        "noSurveysTitle": "So'rovnomalar yo'q",
+        "noSurveysDescription": "Hali so'rovnoma yaratilmagan.",
+        "mentor": "Mentor",
+        "intern": "Stajyor",
+        "criteriaCount_one": "{{count}} mezon",
+        "criteriaCount_other": "{{count}} mezon",
+        "fieldsCount_one": "{{count}} maydon",
+        "fieldsCount_other": "{{count}} maydon",
+        "responsesCount_one": "{{count}} javob",
+        "responsesCount_other": "{{count}} javob",
+        "viewResponses": "Javoblarni ko'rish",
+        "hideResponses": "Javoblarni yashirish",
+        "delete": "O'chirish",
+        "loadingResponses": "Javoblar yuklanmoqda…",
+        "noResponsesTitle": "Javoblar yo'q",
+        "noResponsesDescription": "Hali javoblar yo'q.",
+        "mentorPrefix": "Mentor: {{name}}",
+        "emptyAnswer": "—"
+      }
+    }
+  },
+  "surveys": {
+    "page": {
+      "eyebrow": "So'rovnomalar",
+      "title": "Mening so'rovnomalarim",
+      "description": "Sizga biriktirilgan so'rovnomalarni to'ldiring."
+    },
+    "list": {
+      "loading": "So'rovnomalar yuklanmoqda…",
+      "emptyTitle": "So'rovnomalar yo'q",
+      "emptyDescription": "Sizga hali so'rovnoma biriktirilmagan.",
+      "criteriaCount_one": "Baholash uchun {{count}} mezon",
+      "criteriaCount_other": "Baholash uchun {{count}} mezon",
+      "completed": "Yakunlangan",
+      "pending": "Kutilmoqda",
+      "fillOut": "To'ldirish"
+    },
+    "fill": {
+      "eyebrow": "So'rovnomalar",
+      "title": "So'rovnomani to'ldirish",
+      "description": "Iltimos, barcha maydonlarni to'ldirib yuboring.",
+      "submit": "So'rovnomani yuborish",
+      "loading": "Yuklanmoqda…",
+      "notFoundTitle": "Topilmadi",
+      "notFoundDescription": "So'rovnoma topilmadi yoki sizning rolingiz uchun mavjud emas.",
+      "alreadyCompletedTitle": "Allaqachon yuborilgan",
+      "alreadyCompletedDescription": "Siz bu so'rovnomani allaqachon yuborgansiz.",
+      "emptySurveyTitle": "Bo'sh so'rovnoma",
+      "emptySurveyDescription": "Bu so'rovnomada savollar yo'q.",
+      "ratingLabel": "Baho",
+      "ratingRequired": "Baho majburiy",
+      "commentLabel": "Izoh",
+      "commentPlaceholder": "Izohingizni yozing…",
+      "commentRequired": "Izoh majburiy",
+      "submitErrorTitle": "Yuborib bo'lmadi",
+      "completionProgress": "To'ldirish jarayoni",
+      "answeredOf": "{{completed}} / {{total}} javob berildi",
+      "done": "Tayyor"
+    }
+  },
+  "toasts": {
+    "userCreated": "Foydalanuvchi muvaffaqiyatli yaratildi",
+    "userUpdated": "Foydalanuvchi muvaffaqiyatli yangilandi",
+    "userDeleted": "Foydalanuvchi muvaffaqiyatli o'chirildi",
+    "surveyCreated": "So'rovnoma yaratildi",
+    "surveyDeleted": "So'rovnoma o'chirildi",
+    "surveySubmitted": "So'rovnoma yuborildi",
+    "settingsUpdated": "Sozlamalar muvaffaqiyatli saqlandi"
+  },
+  "api": {
+    "requestFailed": "So'rov muvaffaqiyatsiz yakunlandi"
+  }
+}

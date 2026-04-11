@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  MENTOR
+  INTERN
+}
+
+enum SurveyTarget {
+  MENTOR
+  INTERN
+}
+
+model User {
+  id              String          @id @default(uuid())
+  email           String          @unique
+  passwordHash    String          @map("password_hash")
+  fullName        String          @map("full_name")
+  phone           String?
+  photoUrl        String?         @map("photo_url")
+  role            Role
+  refreshTokenHash String?        @map("refresh_token_hash")
+  createdAt       DateTime        @default(now()) @map("created_at")
+  mentorInterns   InternProfile[] @relation("MentorInterns")
+  internProfile   InternProfile?
+  assessmentsGiven Assessment[]   @relation("MentorAssessments")
+  surveyResponses  SurveyResponse[]
+
+  @@map("users")
+}
+
+model InternProfile {
+  id          String       @id @default(uuid())
+  userId      String       @unique @map("user_id")
+  mentorId    String       @map("mentor_id")
+  user        User         @relation(fields: [userId], references: [id])
+  mentor      User         @relation("MentorInterns", fields: [mentorId], references: [id])
+  assessments Assessment[]
+
+  @@map("intern_profiles")
+}
+
+model Criterion {
+  id          String       @id @default(uuid())
+  title       String
+  description String
+  maxScore    Int          @default(5) @map("max_score")
+  assessments Assessment[]
+
+  @@map("criteria")
+}
+
+model Assessment {
+  id          String        @id @default(uuid())
+  internId    String        @map("intern_id")
+  mentorId    String        @map("mentor_id")
+  criterionId String        @map("criterion_id")
+  score       Int
+  comment     String?
+  createdAt   DateTime      @default(now()) @map("created_at")
+  intern      InternProfile @relation(fields: [internId], references: [id])
+  mentor      User          @relation("MentorAssessments", fields: [mentorId], references: [id])
+  criterion   Criterion     @relation(fields: [criterionId], references: [id])
+
+  @@index([internId, createdAt])
+  @@map("assessments")
+}
+
+model Survey {
+  id        String           @id @default(uuid())
+  title     String
+  target    SurveyTarget
+  createdAt DateTime         @default(now()) @map("created_at")
+  questions SurveyQuestion[]
+  responses SurveyResponse[]
+
+  @@map("surveys")
+}
+
+model SurveyQuestion {
+  id       String         @id @default(uuid())
+  surveyId String         @map("survey_id")
+  title    String
+  order    Int            @default(0)
+  survey   Survey         @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+  answers  SurveyAnswer[]
+
+  @@map("survey_questions")
+}
+
+model SurveyResponse {
+  id           String         @id @default(uuid())
+  surveyId     String         @map("survey_id")
+  respondentId String         @map("respondent_id")
+  comment      String?
+  createdAt    DateTime       @default(now()) @map("created_at")
+  survey       Survey         @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+  respondent   User           @relation(fields: [respondentId], references: [id])
+  answers      SurveyAnswer[]
+
+  @@unique([surveyId, respondentId])
+  @@map("survey_responses")
+}
+
+model SurveyAnswer {
+  id         String         @id @default(uuid())
+  responseId String         @map("response_id")
+  questionId String         @map("question_id")
+  score      Int?
+  comment    String?
+  response   SurveyResponse @relation(fields: [responseId], references: [id], onDelete: Cascade)
+  question   SurveyQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@map("survey_answers")
+}

@@ -1,0 +1,69 @@
+@import 'tailwindcss';
+
+.container {
+  @apply relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-10;
+}
+
+.card {
+  @apply relative w-full max-w-105 border border-(--border) bg-(--surface)/95 shadow-[0_30px_80px_-35px_rgba(37,99,235,0.25)] backdrop-blur-xl;
+}
+
+.cardHeader {
+  @apply flex flex-col items-center gap-4 px-10 pb-0 pt-10 text-center;
+}
+
+.logoWrapper {
+  @apply flex h-14 w-14 items-center justify-center;
+}
+
+.titleGroup {
+  @apply space-y-1;
+}
+
+.title {
+  @apply text-[32px] font-semibold tracking-tight text-(--primary);
+}
+
+.subtitle {
+  @apply text-sm text-(--muted);
+}
+
+.cardContent {
+  @apply px-10 pb-10 pt-6;
+}
+
+.sessionAlert {
+  @apply mb-5 rounded-2xl border border-(--border) bg-(--bg) px-4 py-3 text-center text-sm text-(--muted);
+}
+
+.form {
+  @apply space-y-5;
+}
+
+.label {
+  @apply text-sm font-semibold text-(--muted);
+}
+
+.errorAlert {
+  @apply rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700;
+}
+
+.submitButton {
+  @apply h-14 text-base font-semibold;
+}
+
+.divider {
+  @apply my-8 h-px bg-(--border);
+}
+
+.footer {
+  @apply space-y-5 text-center;
+}
+
+.footerText {
+  @apply text-sm leading-6 text-(--muted);
+}
+
+.footerLink {
+  @apply font-semibold text-(--text);
+}

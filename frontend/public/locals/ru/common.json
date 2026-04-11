@@ -1,0 +1,446 @@
+{
+  "language": {
+    "label": "Язык",
+    "ru": "RU",
+    "en": "EN",
+    "uz": "UZ"
+  },
+  "roles": {
+    "mentor": "Ментор",
+    "admin": "Администратор",
+    "intern": "Стажёр",
+    "none": "Без роли",
+    "guest": "гость",
+    "byCode": {
+      "ADMIN": "Админ",
+      "MENTOR": "Ментор",
+      "INTERN": "Стажёр"
+    }
+  },
+  "layout": {
+    "brandTitle": "Click Track",
+    "brandLogoAlt": "Логотип Click Track",
+    "support": "Поддержка",
+    "logout": "Выйти",
+    "openSettings": "Открыть настройки",
+    "titles": {
+      "allInterns": "Все стажёры",
+      "interns": "Стажёры",
+      "overview": "Обзор",
+      "myProgress": "Мой прогресс",
+      "settings": "Настройки",
+      "createUser": "Создать пользователя",
+      "manageUsers": "Управление пользователями",
+      "surveys": "Опросы",
+      "workspace": "Рабочее пространство"
+    },
+    "nav": {
+      "dashboard": "Панель",
+      "allInterns": "Все стажёры",
+      "surveys": "Опросы",
+      "progress": "Прогресс",
+      "createUser": "Создать пользователя",
+      "manageUsers": "Управление пользователями"
+    },
+    "theme": {
+      "switchToLight": "Переключить на светлую тему",
+      "switchToDark": "Переключить на тёмную тему"
+    }
+  },
+  "protectedRoute": {
+    "loadingSession": "Загрузка сессии..."
+  },
+  "auth": {
+    "login": {
+      "subtitle": "Платформа прогресса стажёров",
+      "footerText": "Нет аккаунта или забыли пароль?",
+      "footerLink": "Свяжитесь с администратором.",
+      "activeSession": "Обнаружена активная сессия. Перенаправляем в рабочее пространство.",
+      "emailLabel": "Email",
+      "passwordLabel": "Пароль",
+      "emailPlaceholder": "name@example.com",
+      "passwordPlaceholder": "••••••••",
+      "hidePassword": "Скрыть пароль",
+      "showPassword": "Показать пароль",
+      "submit": "Войти",
+      "submitLoading": "Вход..."
+    },
+    "validation": {
+      "emailInvalid": "Введите корректный email",
+      "passwordMin": "Пароль должен содержать минимум {{count}} символов"
+    }
+  },
+  "dashboard": {
+    "eyebrow": "Пространство ментора",
+    "title": "Назначенные стажёры",
+    "description": "Просматривайте прогресс, последние обновления критериев и открывайте карточки стажёров для оценки.",
+    "metrics": {
+      "internsLabel": "Стажёры",
+      "internsHint": "Назначены в ваш портфель",
+      "reviewsLabel": "Оценки",
+      "reviewsHint": "Отправленные оценки ментора",
+      "avgLabel": "Средний балл",
+      "avgHint": "По всем сохранённым критериям"
+    },
+    "empty": {
+      "title": "Пока нет назначений",
+      "description": "Этому ментору пока не назначены стажёры. Попросите администратора прикрепить стажёров к вашему профилю."
+    },
+    "roster": {
+      "title": "Список стажёров",
+      "subtitle": "Выберите карточку стажёра, чтобы продолжить оценку и обратную связь.",
+      "openCard": "Открыть карточку стажёра",
+      "reviewsCount_one": "{{count}} оценка",
+      "reviewsCount_few": "{{count}} оценки",
+      "reviewsCount_many": "{{count}} оценок",
+      "reviewsCount_other": "{{count}} оценки",
+      "averageScore": "Средний балл",
+      "lastCriterion": "Последний критерий",
+      "noReviewsYet": "Пока нет оценок"
+    }
+  },
+  "allInterns": {
+    "toasts": {
+      "addedTitle": "Стажёр добавлен",
+      "addedDescription": "Стажёр успешно прикреплён к вам.",
+      "errorTitle": "Ошибка",
+      "errorDescription": "Не удалось добавить стажёра. Попробуйте ещё раз."
+    },
+    "error": {
+      "title": "Что-то пошло не так",
+      "description": "Не удалось загрузить стажёров."
+    },
+    "header": {
+      "eyebrow": "Все стажёры",
+      "title": "Список стажёров платформы",
+      "description": "Просматривайте всех стажёров платформы. Карточки с активным профилем показывают прогресс оценок."
+    },
+    "metrics": {
+      "totalLabel": "Всего стажёров",
+      "totalHint": "Зарегистрированы с ролью INTERN",
+      "withProfileLabel": "С профилем",
+      "withProfileHint": "Имеют активный профиль стажёра",
+      "withoutProfileLabel": "Без профиля",
+      "withoutProfileHint": "Профиль ещё не прикреплён",
+      "assessmentsLabel": "Всего оценок",
+      "assessmentsHint": "По всем профилям"
+    },
+    "empty": {
+      "title": "Стажёров пока нет",
+      "description": "В системе не найдено стажёров. Попросите администратора создать аккаунты."
+    },
+    "list": {
+      "title": "Все стажёры",
+      "subtitle": "Стажёры без профиля пока не назначены ментору.",
+      "averageScore": "Средний балл",
+      "lastCriterion": "Последний критерий",
+      "noReviewsYet": "Пока нет оценок",
+      "noProfile": "Без профиля",
+      "profileNotAssigned": "Профиль не назначен",
+      "reviewsCount_one": "{{count}} оценка",
+      "reviewsCount_few": "{{count}} оценки",
+      "reviewsCount_many": "{{count}} оценок",
+      "reviewsCount_other": "{{count}} оценки",
+      "ctaUnassigned": "Добавить стажёра",
+      "ctaAssignedYou": "Назначен вам",
+      "ctaAssignedOther": "Назначен другому ментору"
+    }
+  },
+  "mentorIntern": {
+    "error": {
+      "title": "Данные стажёра недоступны",
+      "description": "Не удалось загрузить рабочее пространство оценки. Вернитесь в панель ментора и попробуйте снова."
+    },
+    "breadcrumb": {
+      "interns": "Стажёры"
+    },
+    "stats": {
+      "assessments": "Оценки",
+      "criteria": "Критерии",
+      "avgScore": "Средний балл"
+    },
+    "skills": {
+      "title": "Оценка навыков",
+      "recentEntries": "Последние записи"
+    },
+    "performance": {
+      "title": "Общая эффективность",
+      "subtitle": "Обратная связь и стратегические заметки ментора",
+      "globalRating": "Глобальный рейтинг",
+      "newAssessment": "Новая оценка",
+      "criterion": "Критерий",
+      "score": "Балл",
+      "max": "макс {{count}}",
+      "percentOfMax": "{{count}}% от максимума",
+      "mentorNotes": "Заметки ментора",
+      "notesPlaceholder": "Зоны роста, достижения, будущий потенциал...",
+      "submit": "Отправить оценку",
+      "saving": "Сохранение…",
+      "saveErrorTitle": "Не удалось сохранить оценку",
+      "historyTitle": "Последние оценки",
+      "historyEmptyTitle": "История оценок пуста",
+      "historyEmptyDescription": "Пока нет оценок. Отправьте первую оценку из левой панели."
+    }
+  },
+  "me": {
+    "loadingProfile": "Загрузка профиля...",
+    "breadcrumbs": {
+      "interns": "Стажёры"
+    },
+    "fallback": {
+      "noName": "Без имени",
+      "noEmail": "Без email",
+      "noFeedback": "Пока нет комментариев"
+    },
+    "metrics": {
+      "avgLabel": "Средний балл",
+      "avgHint": "По всем оценкам критериев",
+      "reviewsLabel": "Всего оценок",
+      "reviewsHint": "Оставлены вашим ментором",
+      "lastUpdateLabel": "Последнее обновление",
+      "lastUpdateHint": "Самое свежее обновление от ментора"
+    },
+    "skills": {
+      "title": "Оценка навыков",
+      "expert": "Экспертный уровень",
+      "active": "Активный участник",
+      "defaultComment": "Стабильное качество и результативность в этой области."
+    },
+    "monthly": {
+      "title": "История по месяцам",
+      "globalRating": "Глобальный рейтинг",
+      "notesTitle": "Ежемесячные стратегические заметки ментора",
+      "scoreLabel": "Балл:",
+      "emptyComment": "Ментор не оставил сводный комментарий за этот месяц.",
+      "emptyState": "Ожидаем первый ежемесячный обзор..."
+    },
+    "leaderboard": {
+      "title": "Таблица лидеров",
+      "subtitle": "Рейтинг стажёров в реальном времени на основе AVG.",
+      "rank": "Место",
+      "intern": "Стажёр",
+      "reviews": "Оценки",
+      "avgScore": "Средний балл",
+      "you": "Вы"
+    }
+  },
+  "settings": {
+    "page": {
+      "eyebrow": "Профиль",
+      "title": "Настройки",
+      "description": "Управляйте аватаром и телефоном аккаунта."
+    },
+    "card": {
+      "title": "Параметры профиля",
+      "description": "Изменения сохраняются сразу после отправки формы."
+    },
+    "fields": {
+      "fullName": "ФИО",
+      "email": "Email",
+      "role": "Роль",
+      "phone": "Телефон",
+      "phonePlaceholder": "+998901234567"
+    },
+    "photo": {
+      "hint": "Форматы: JPEG, PNG, WebP. Максимум 5MB.",
+      "selectedFile": "Выбран файл: {{fileName}}"
+    },
+    "actions": {
+      "uploadPhoto": "Загрузить фото",
+      "removePhoto": "Удалить фото",
+      "cancelRemovePhoto": "Отменить удаление",
+      "save": "Сохранить",
+      "saving": "Сохранение…",
+      "retry": "Повторить"
+    },
+    "validation": {
+      "phoneE164": "Введите телефон в формате E.164 (например, +998901234567).",
+      "photoType": "Разрешены только JPEG, PNG или WebP.",
+      "photoSize": "Размер файла не должен превышать 5MB.",
+      "photoProcessedSize": "После кадрирования файл превышает 5MB. Уменьшите масштаб или выберите другое изображение."
+    },
+    "editor": {
+      "title": "Редактор аватара",
+      "description": "Подвиньте изображение и настройте масштаб перед сохранением.",
+      "imageAlt": "Предпросмотр редактируемого аватара",
+      "dragHint": "Перетаскивайте изображение внутри квадрата, чтобы выбрать нужную область.",
+      "zoomLabel": "Масштаб",
+      "previewLabel": "Предпросмотр",
+      "cancel": "Отмена",
+      "apply": "Применить",
+      "applying": "Применение…",
+      "processError": "Не удалось обработать изображение. Попробуйте выбрать другой файл."
+    },
+    "state": {
+      "loadingTitle": "Загрузка настроек",
+      "loadingDescription": "Подождите, загружаем данные профиля.",
+      "errorTitle": "Не удалось загрузить настройки",
+      "errorDescription": "Попробуйте обновить страницу или повторить позже.",
+      "saveErrorTitle": "Не удалось сохранить настройки"
+    }
+  },
+  "admin": {
+    "common": {
+      "control": "Панель администратора",
+      "role": "Роль",
+      "mentor": "Ментор",
+      "assignedMentor": "Назначенный ментор",
+      "selectMentor": "Выберите ментора",
+      "saveChanges": "Сохранить изменения",
+      "deleteUser": "Удалить пользователя",
+      "notAssigned": "Не назначен",
+      "notApplicable": "Не применимо",
+      "linked": "Связан",
+      "standalone": "Отдельный",
+      "editCard": "Карточка редактирования"
+    },
+    "createUserPage": {
+      "title": "Создать пользователя",
+      "description": "Создавайте аккаунты и прикрепляйте стажёров к ментору при создании."
+    },
+    "manageUsersPage": {
+      "title": "Управление пользователями",
+      "description": "Проверяйте назначенных менторов, редактируйте данные и поддерживайте чистую ролевую модель."
+    },
+    "surveysPage": {
+      "title": "Опросы",
+      "description": "Создавайте опросы для менторов и стажёров. Просматривайте ответы после отправки."
+    },
+    "users": {
+      "panelEmptyTitle": "Пользователи не найдены",
+      "panelEmptyDescription": "Пока нет пользователей для управления.",
+      "panelErrorTitle": "Не удалось загрузить список пользователей",
+      "tableAria": "Список пользователей",
+      "columns": {
+        "user": "Пользователь",
+        "role": "Роль",
+        "mentor": "Ментор",
+        "status": "Статус"
+      }
+    },
+    "createForm": {
+      "fullName": "ФИО",
+      "email": "Email",
+      "password": "Пароль",
+      "hidePassword": "Скрыть пароль",
+      "showPassword": "Показать пароль",
+      "submit": "Создать пользователя",
+      "errorTitle": "Не удалось создать пользователя",
+      "validation": {
+        "fullNameRequired": "ФИО обязательно",
+        "emailRequired": "Email обязателен",
+        "emailInvalid": "Введите корректный email",
+        "passwordRequired": "Пароль обязателен",
+        "passwordMin": "Пароль должен быть не короче 8 символов"
+      }
+    },
+    "setupCard": {
+      "title": "Гайд по настройке аккаунта",
+      "subtitle": "Роль определяет возможности пользователя и необходимость назначения ментора.",
+      "rules": {
+        "intern": "Требуется назначенный ментор. Выберите его в списке после выбора роли стажёра.",
+        "mentor": "Назначение ментора не требуется. Пользователь появится в списке менторов для назначения стажёров.",
+        "admin": "Полный доступ к системе. Назначение ментора не требуется. Используйте с осторожностью."
+      },
+      "notes": {
+        "email": "Email нельзя изменить после создания.",
+        "roleMentor": "Роль и ментора можно изменить позже в разделе управления пользователями.",
+        "password": "Пароль должен быть задан при создании."
+      }
+    },
+    "surveys": {
+      "createForm": {
+        "surveyTitle": "Название опроса",
+        "targetRole": "Целевая роль",
+        "criteria": "Критерии",
+        "criterion": "Критерий {{count}}",
+        "required": "Обязательно",
+        "addCriterion": "+ Добавить критерий",
+        "removeCriterion": "Удалить критерий",
+        "submit": "Создать опрос",
+        "titleRequired": "Название обязательно",
+        "errorTitle": "Не удалось создать опрос"
+      },
+      "list": {
+        "loadingSurveys": "Загрузка опросов…",
+        "noSurveysTitle": "Опросов нет",
+        "noSurveysDescription": "Пока не создано ни одного опроса.",
+        "mentor": "Ментор",
+        "intern": "Стажёр",
+        "criteriaCount_one": "{{count}} критерий",
+        "criteriaCount_few": "{{count}} критерия",
+        "criteriaCount_many": "{{count}} критериев",
+        "criteriaCount_other": "{{count}} критерия",
+        "fieldsCount_one": "{{count}} поле",
+        "fieldsCount_few": "{{count}} поля",
+        "fieldsCount_many": "{{count}} полей",
+        "fieldsCount_other": "{{count}} поля",
+        "responsesCount_one": "{{count}} ответ",
+        "responsesCount_few": "{{count}} ответа",
+        "responsesCount_many": "{{count}} ответов",
+        "responsesCount_other": "{{count}} ответа",
+        "viewResponses": "Показать ответы",
+        "hideResponses": "Скрыть ответы",
+        "delete": "Удалить",
+        "loadingResponses": "Загрузка ответов…",
+        "noResponsesTitle": "Ответов нет",
+        "noResponsesDescription": "Пока нет ответов.",
+        "mentorPrefix": "Ментор: {{name}}",
+        "emptyAnswer": "—"
+      }
+    }
+  },
+  "surveys": {
+    "page": {
+      "eyebrow": "Опросы",
+      "title": "Мои опросы",
+      "description": "Заполните назначенные вам опросы."
+    },
+    "list": {
+      "loading": "Загрузка опросов…",
+      "emptyTitle": "Опросов нет",
+      "emptyDescription": "Вам пока не назначены опросы.",
+      "criteriaCount_one": "{{count}} критерий для оценки",
+      "criteriaCount_few": "{{count}} критерия для оценки",
+      "criteriaCount_many": "{{count}} критериев для оценки",
+      "criteriaCount_other": "{{count}} критерия для оценки",
+      "completed": "Завершён",
+      "pending": "В ожидании",
+      "fillOut": "Заполнить"
+    },
+    "fill": {
+      "eyebrow": "Опросы",
+      "title": "Заполнить опрос",
+      "description": "Пожалуйста, заполните все поля и отправьте.",
+      "submit": "Отправить опрос",
+      "loading": "Загрузка…",
+      "notFoundTitle": "Не найдено",
+      "notFoundDescription": "Опрос не найден или недоступен для вашей роли.",
+      "alreadyCompletedTitle": "Уже заполнено",
+      "alreadyCompletedDescription": "Вы уже отправили этот опрос.",
+      "emptySurveyTitle": "Пустой опрос",
+      "emptySurveyDescription": "В этом опросе нет вопросов.",
+      "ratingLabel": "Оценка",
+      "ratingRequired": "Оценка обязательна",
+      "commentLabel": "Комментарий",
+      "commentPlaceholder": "Напишите ваш комментарий…",
+      "commentRequired": "Комментарий обязателен",
+      "submitErrorTitle": "Не удалось отправить",
+      "completionProgress": "Прогресс заполнения",
+      "answeredOf": "{{completed}} из {{total}} отвечено",
+      "done": "Готово"
+    }
+  },
+  "toasts": {
+    "userCreated": "Пользователь успешно создан",
+    "userUpdated": "Пользователь успешно обновлён",
+    "userDeleted": "Пользователь успешно удалён",
+    "surveyCreated": "Опрос создан",
+    "surveyDeleted": "Опрос удалён",
+    "surveySubmitted": "Опрос отправлен",
+    "settingsUpdated": "Настройки успешно сохранены"
+  },
+  "api": {
+    "requestFailed": "Запрос завершился ошибкой"
+  }
+}

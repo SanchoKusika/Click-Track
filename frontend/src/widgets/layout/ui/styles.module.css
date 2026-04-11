@@ -1,0 +1,192 @@
+@import 'tailwindcss';
+
+.layout {
+  @apply min-h-screen bg-(--bg) text-(--text);
+}
+
+.flexWrapper {
+  @apply flex min-h-screen;
+}
+
+.sidebar {
+  @apply hidden w-60 border-r border-(--border) bg-(--sidebar) px-4 py-6 lg:flex lg:flex-col lg:fixed lg:inset-y-0 lg:left-0 lg:z-10 overflow-y-auto;
+}
+
+.sidebarHeader {
+  @apply space-y-7;
+}
+
+.brandGroup {
+  @apply flex flex-row items-center gap-3 px-2;
+}
+
+.brandLogo {
+  @apply h-9 w-9;
+}
+
+.brandTitle {
+  @apply text-2xl leading-none font-bold text-(--primary) tracking-tight;
+}
+
+.nav {
+  @apply space-y-1;
+}
+
+.navButton {
+  @apply flex w-full items-center gap-2 rounded-xl px-3 py-2 text-left text-sm transition;
+}
+
+.navButtonActive {
+  @apply bg-(--surface) font-semibold text-(--primary) shadow-[0_6px_18px_-14px_rgba(39,49,79,0.4)];
+}
+
+.navButtonInactive {
+  @apply text-(--muted) hover:bg-(--surface)/65;
+}
+
+.sidebarFooter {
+  @apply mt-auto space-y-1;
+}
+
+.footerButton {
+  @apply flex w-full items-center gap-2 rounded-xl px-3 py-2 text-left text-sm text-(--muted) transition hover:bg-(--surface)/65;
+}
+
+.main {
+  @apply min-w-0 flex-1 lg:ml-60;
+}
+
+.header {
+  @apply sticky top-0 z-20 border-b border-(--border) bg-(--surface)/95 backdrop-blur;
+}
+
+.headerContent {
+  @apply flex items-center gap-3 px-4 py-3 md:px-6;
+}
+
+.headerTitleGroup {
+  @apply min-w-0;
+}
+
+.headerTitle {
+  @apply text-xl font-semibold text-(--primary);
+}
+
+.headerActions {
+  @apply ml-auto flex items-center gap-2;
+}
+
+.actionButton {
+  @apply border border-(--border) bg-(--surface) text-(--muted);
+}
+
+.languagePicker {
+  @apply rounded-full bg-(--surface) border border-(--border);
+}
+
+.languagePicker :global(.toggle-button:not([data-selected])) {
+  background: transparent;
+  color: var(--muted);
+}
+
+.languagePicker :global(.toggle-button[data-selected]) {
+  background-color: var(--primary-soft);
+  color: var(--primary);
+}
+
+.themeToggle {
+  @apply relative flex items-center rounded-full bg-(--surface) border border-(--border) p-0.5;
+}
+
+.themeToggleIndicator {
+  @apply absolute top-0.5 bottom-0.5 rounded-full bg-(--primary-soft);
+  width: calc(50% - 2px);
+  transition: left 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.themeToggleIndicator[data-theme='dark'] {
+  left: 2px;
+}
+
+.themeToggleIndicator[data-theme='light'] {
+  left: calc(50%);
+}
+
+.themeToggleBtn {
+  @apply relative z-10 flex items-center justify-center w-7 h-7 rounded-full transition-colors duration-200 text-(--muted) cursor-pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.themeToggleBtn[data-active='true'] {
+  @apply text-(--primary);
+}
+
+@keyframes moonrise {
+  0% { transform: rotate(-45deg) scale(0.6); opacity: 0; }
+  60% { transform: rotate(8deg) scale(1.15); opacity: 1; }
+  100% { transform: rotate(0deg) scale(1); opacity: 1; }
+}
+
+@keyframes sunrise {
+  0% { transform: scale(0.5) rotate(90deg); opacity: 0; }
+  50% { transform: scale(1.2) rotate(-10deg); opacity: 1; }
+  75% { transform: scale(0.95) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.themeToggleMoon svg { animation: moonrise 0.4s ease both; }
+.themeToggleSun svg { animation: sunrise 0.45s ease both; }
+
+.userProfile {
+  @apply hidden items-center gap-3 pl-2 sm:flex;
+}
+
+.userDetails {
+  @apply text-right;
+}
+
+.userName {
+  @apply text-sm font-semibold text-(--text);
+}
+
+.userRole {
+  @apply text-xs text-(--muted);
+}
+
+.userAvatar {
+  @apply bg-(--primary-soft) text-(--primary);
+}
+
+.mobileNav {
+  @apply border-t border-(--border) px-4 py-3 lg:hidden;
+}
+
+.mobileNavContent {
+  @apply flex items-center gap-2 overflow-x-auto;
+}
+
+.mobileNavButton {
+  @apply inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm whitespace-nowrap;
+}
+
+.mobileNavButtonActive {
+  @apply border-(--primary) bg-(--primary-soft) text-(--primary);
+}
+
+.mobileNavButtonInactive {
+  @apply border-(--border) bg-(--surface) text-(--muted);
+}
+
+.mobileRoleChip {
+  @apply ml-auto hidden sm:inline-flex;
+}
+
+.pageContent {
+  @apply px-4 py-5 md:px-6 md:py-6;
+}
+
+.mobileFooter {
+  @apply px-4 pb-6 lg:hidden;
+}

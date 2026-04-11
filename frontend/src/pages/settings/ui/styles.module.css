@@ -1,0 +1,160 @@
+@import 'tailwindcss';
+
+.card {
+  @apply border border-(--border) bg-(--surface) shadow-none;
+}
+
+.cardContent {
+  @apply gap-6 p-6;
+}
+
+.cardHeading {
+  @apply space-y-1;
+}
+
+.cardTitle {
+  @apply text-xl font-semibold text-(--text);
+}
+
+.cardDescription {
+  @apply text-sm text-(--muted);
+}
+
+/* Avatar row at top */
+.avatarRow {
+  @apply flex items-center justify-center gap-6 pb-6 mb-2 border-b border-(--border);
+}
+
+.avatarButtons {
+  @apply flex flex-col gap-2 shrink-0;
+}
+
+.avatarCenter {
+  @apply flex flex-col items-center gap-1.5;
+}
+
+.avatar {
+  @apply h-20 w-20 text-2xl;
+}
+
+.uploadLabel {
+  @apply inline-flex cursor-pointer;
+}
+
+.uploadBtn {
+  @apply block w-full text-center rounded-lg border border-(--border) px-3 py-1.5 text-sm font-medium text-(--text) transition hover:bg-(--surface-2);
+}
+
+.photoHint {
+  @apply text-xs text-(--muted) text-center;
+}
+
+.photoFileName {
+  @apply text-xs text-(--muted) text-center max-w-[140px] truncate;
+}
+
+.photoError {
+  @apply text-xs text-rose-600 text-center;
+}
+
+/* Table layout */
+.table {
+  @apply w-full divide-y divide-(--border) mt-2;
+}
+
+.tableRow {
+  @apply flex items-center justify-between gap-4 py-3.5 w-full;
+}
+
+.tableLabel {
+  @apply text-sm text-(--muted) font-medium shrink-0;
+}
+
+.tableValue {
+  @apply text-sm text-(--text) text-right;
+}
+
+.tableValueCol {
+  @apply flex flex-col gap-1 w-48;
+}
+
+.submitRow {
+  @apply mt-5;
+}
+
+/* Photo editor modal */
+.modalOverlay {
+  @apply fixed inset-0 z-[120] flex items-center justify-center bg-black/55 p-4;
+}
+
+.modalPanel {
+  @apply w-full max-w-2xl rounded-2xl border border-(--border) bg-(--surface) p-6 shadow-2xl;
+}
+
+.modalHeading {
+  @apply space-y-1;
+}
+
+.modalTitle {
+  @apply text-xl font-semibold text-(--text);
+}
+
+.modalDescription {
+  @apply text-sm text-(--muted);
+}
+
+.editorGrid {
+  @apply mt-5 grid gap-5 md:grid-cols-[1fr,180px];
+}
+
+.cropCol {
+  @apply space-y-4;
+}
+
+.cropArea {
+  @apply relative mx-auto h-[280px] w-[280px] touch-none overflow-hidden rounded-2xl border border-(--border) bg-black/80;
+}
+
+.cropImage {
+  @apply absolute max-w-none select-none;
+}
+
+.dragHint {
+  @apply text-center text-xs text-(--muted);
+}
+
+.zoomRow {
+  @apply block space-y-2;
+}
+
+.zoomLabel {
+  @apply text-xs uppercase tracking-[0.12em] text-(--muted);
+}
+
+.zoomSlider {
+  @apply w-full accent-(--primary);
+}
+
+.previewCol {
+  @apply space-y-3;
+}
+
+.previewLabel {
+  @apply text-xs uppercase tracking-[0.12em] text-(--muted);
+}
+
+.previewCircle {
+  @apply relative h-24 w-24 overflow-hidden rounded-full border border-(--border) bg-black/80;
+}
+
+.previewImage {
+  @apply absolute max-w-none select-none;
+}
+
+.previewAvatar {
+  @apply h-24 w-24 text-2xl;
+}
+
+.modalActions {
+  @apply mt-6 flex flex-wrap justify-end gap-2;
+}

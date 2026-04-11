@@ -1,0 +1,105 @@
+@import 'tailwindcss';
+
+.pageContainer {
+  @apply space-y-6;
+}
+
+.gridContainer {
+  @apply grid gap-6 xl:grid-cols-[0.95fr_1.05fr];
+}
+
+.glassCard {
+  @apply border border-slate-200/80 bg-white/85 shadow-[0_25px_70px_-45px_rgba(15,23,42,0.45)];
+}
+
+.cardHeader {
+  @apply flex flex-col items-start gap-2 p-6;
+}
+
+.cardTitle {
+  @apply text-2xl font-semibold text-slate-950;
+}
+
+.cardDescription {
+  @apply text-sm text-slate-500;
+}
+
+.divider {
+  @apply h-px bg-slate-200;
+}
+
+.form {
+  @apply space-y-5;
+}
+
+.fieldLabel {
+  @apply block space-y-2;
+}
+
+.labelText {
+  @apply text-sm font-medium text-slate-700;
+}
+
+.input {
+  @apply w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-4 focus:ring-sky-100;
+}
+
+.select {
+  @apply w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-4 focus:ring-sky-100;
+}
+
+.tableContainer {
+  @apply overflow-x-auto rounded-3xl border border-slate-200;
+}
+
+.table {
+  @apply min-w-full text-left text-sm text-slate-700;
+}
+
+.tableHeader {
+  @apply bg-slate-50 text-xs uppercase tracking-[0.2em] text-slate-500;
+}
+
+.tableHeadCell {
+  @apply px-6 py-4;
+}
+
+.tableRow {
+  @apply border-t border-slate-200 bg-white;
+}
+
+.tableCell {
+  @apply px-6 py-4;
+}
+
+.userName {
+  @apply font-medium text-slate-950;
+}
+
+.userEmail {
+  @apply text-sm text-slate-500;
+}
+
+.editCard {
+  @apply border border-slate-200 bg-slate-50/80 shadow-none;
+}
+
+.editCardHeader {
+  @apply flex flex-wrap items-center justify-between gap-3;
+}
+
+.editCardTitle {
+  @apply text-lg font-semibold text-slate-950;
+}
+
+.editGrid {
+  @apply grid gap-4 md:grid-cols-2;
+}
+
+.readOnlyInput {
+  @apply w-full rounded-2xl border border-slate-200 bg-slate-100 px-4 py-3 text-sm text-slate-500 outline-none;
+}
+
+.actionsRow {
+  @apply flex flex-wrap gap-3;
+}

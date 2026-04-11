@@ -1,0 +1,30 @@
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { SwaggerModule } from '@nestjs/swagger';
+import { PrismaService } from './prisma.service';
+import { createSwaggerDocument } from './swagger/document';
+import { mkdirSync } from 'node:fs';
+import { join } from 'node:path';
+
+async function bootstrap() {
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.enableCors({ origin: true, credentials: true });
+  const uploadsDirectory = join(process.cwd(), 'uploads');
+  mkdirSync(uploadsDirectory, { recursive: true });
+  app.useStaticAssets(uploadsDirectory, { prefix: '/uploads' });
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
+  const swaggerDocument = createSwaggerDocument(app);
+  SwaggerModule.setup('api/docs', app, swaggerDocument);
+  const prismaService = app.get(PrismaService);
+  prismaService.enableShutdownHooks(app);
+  await app.listen(process.env.PORT ?? 3000);
+}
+void bootstrap();
