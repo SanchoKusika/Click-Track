@@ -39,9 +39,9 @@ model User {
 model InternProfile {
   id          String       @id @default(uuid())
   userId      String       @unique @map("user_id")
-  mentorId    String       @map("mentor_id")
-  user        User         @relation(fields: [userId], references: [id])
-  mentor      User         @relation("MentorInterns", fields: [mentorId], references: [id])
+  mentorId    String?      @map("mentor_id")
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mentor      User?        @relation("MentorInterns", fields: [mentorId], references: [id], onDelete: SetNull)
   assessments Assessment[]
 
   @@map("intern_profiles")
@@ -65,8 +65,8 @@ model Assessment {
   score       Int
   comment     String?
   createdAt   DateTime      @default(now()) @map("created_at")
-  intern      InternProfile @relation(fields: [internId], references: [id])
-  mentor      User          @relation("MentorAssessments", fields: [mentorId], references: [id])
+  intern      InternProfile @relation(fields: [internId], references: [id], onDelete: Cascade)
+  mentor      User          @relation("MentorAssessments", fields: [mentorId], references: [id], onDelete: Cascade)
   criterion   Criterion     @relation(fields: [criterionId], references: [id])
 
   @@index([internId, createdAt])

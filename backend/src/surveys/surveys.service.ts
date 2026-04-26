@@ -3,7 +3,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { Role } from '../common/enums/role.enum';
+import { Role } from '@prisma/client';
 import { PrismaService } from '../prisma.service';
 import { CreateSurveyDto } from './dto/create-survey.dto';
 import { SubmitSurveyResponseDto } from './dto/submit-survey-response.dto';

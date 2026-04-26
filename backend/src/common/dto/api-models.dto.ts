@@ -1,6 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Role } from '@prisma/client';
-import { SurveyTarget } from '../../common/enums/survey-target.enum';
+import { Role, SurveyTarget } from '@prisma/client';
 
 export class ApiErrorResponseDto {
   @ApiProperty({ example: 400 })

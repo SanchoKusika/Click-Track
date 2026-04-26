@@ -13,7 +13,7 @@ import { CriteriaService } from './criteria.service';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
-import { Role } from '../common/enums/role.enum';
+import { Role } from '@prisma/client';
 import { CreateCriterionDto } from './dto/create-criterion.dto';
 import {
   ApiErrorResponseDto,

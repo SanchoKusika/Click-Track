@@ -6,6 +6,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { SwaggerModule } from '@nestjs/swagger';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
+import { PrismaExceptionFilter } from './common/filters/prisma-exception.filter';
 import { PrismaService } from './prisma.service';
 import { createSwaggerDocument } from './swagger/document';
 import { mkdirSync } from 'node:fs';
@@ -33,6 +34,7 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
+  app.useGlobalFilters(new PrismaExceptionFilter());
   const swaggerDocument = createSwaggerDocument(app);
   SwaggerModule.setup('api/docs', app, swaggerDocument);
   const prismaService = app.get(PrismaService);

@@ -94,6 +94,9 @@ async function main() {
     include: { user: true },
   });
   for (const profile of profiles) {
+    if (!profile.mentorId) {
+      continue;
+    }
     const existingAssessment = await prisma.assessment.findFirst({
       where: {
         internId: profile.id,
