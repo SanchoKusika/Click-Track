@@ -92,18 +92,22 @@ cp .env.docker.example .env.docker
 
 #### 2. Запуск
 
-Production-like:
+Production-like (важно передать `--env-file`, чтобы compose увидел переменные **до** старта контейнеров — например, `VITE_API_URL` нужен на этапе сборки frontend):
 
 ```bash
-docker compose up --build
+docker compose --env-file .env.docker up --build
 ```
+
+> Без `--env-file` Compose ругается `The "POSTGRES_USER" variable is not set` — он не читает `.env.docker` автоматически (по умолчанию ищет файл `.env`). Не путать с `env_file:` внутри сервисов: тот пробрасывает переменные **в контейнер**, но не в сам Compose-процесс для интерполяции.
+
+Альтернатива — переименовать `.env.docker` в `.env` (тогда `docker compose up --build` работает без флагов). Минус — путается с `.env` для локального запуска без Docker.
 
 #### 3. Применение миграций
 
 При первом запуске `prisma migrate deploy` выполнится автоматически (внутри backend-контейнера). Если нужно засеять демо-данные:
 
 ```bash
-docker compose run --rm backend npm run prisma:seed
+docker compose --env-file .env.docker run --rm backend npm run prisma:seed
 ```
 
 > **Важно:** в проде сидинг **не запускается автоматически** — это ручной one-shot шаг. Запускайте только если действительно нужны тестовые аккаунты.
@@ -118,13 +122,13 @@ docker compose run --rm backend npm run prisma:seed
 Остановка:
 
 ```bash
-docker compose down
+docker compose --env-file .env.docker down
 ```
 
 Полный сброс с удалением volume БД:
 
 ```bash
-docker compose down -v
+docker compose --env-file .env.docker down -v
 ```
 
 ### Вариант 2: Локально (без Docker)
@@ -155,20 +159,26 @@ docker compose down -v
 Тоже использует `.env.docker`:
 
 ```bash
-docker compose -f docker-compose.dev.yml up --build
+docker compose --env-file .env.docker -f docker-compose.dev.yml up --build
 ```
 
 Остановка:
 
 ```bash
-docker compose -f docker-compose.dev.yml down
+docker compose --env-file .env.docker -f docker-compose.dev.yml down
 ```
 
 Сброс dev-volume:
 
 ```bash
-docker compose -f docker-compose.dev.yml down -v
+docker compose --env-file .env.docker -f docker-compose.dev.yml down -v
 ```
+
+> Совет: чтобы не печатать `--env-file .env.docker` каждый раз, добавьте alias в shell:
+> ```bash
+> alias dcc='docker compose --env-file .env.docker'
+> # потом просто: dcc up --build
+> ```
 
 ## Аутентификация
 
