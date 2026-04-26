@@ -227,9 +227,6 @@ export class AuthTokensResponseDto {
   @ApiProperty()
   accessToken!: string;
 
-  @ApiProperty()
-  refreshToken!: string;
-
   @ApiProperty({ type: () => PublicUserDto })
   user!: PublicUserDto;
 }

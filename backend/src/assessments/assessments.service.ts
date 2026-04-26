@@ -35,7 +35,9 @@ export class AssessmentsService {
     return this.prisma.internProfile.findMany({
       where: { mentorId },
       include: {
-        user: { select: { id: true, fullName: true, email: true, photoUrl: true } },
+        user: {
+          select: { id: true, fullName: true, email: true, photoUrl: true },
+        },
         assessments: {
           include: {
             criterion: true,
@@ -52,7 +54,9 @@ export class AssessmentsService {
     const intern = await this.prisma.internProfile.findUnique({
       where: { id: internId },
       include: {
-        user: { select: { id: true, fullName: true, email: true, photoUrl: true } },
+        user: {
+          select: { id: true, fullName: true, email: true, photoUrl: true },
+        },
       },
     });
 

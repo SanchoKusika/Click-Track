@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
@@ -17,6 +18,7 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
+import type { Request } from 'express';
 import { CurrentUser } from '../common/decorators/current-user.decorator';
 import { ApiErrorResponseDto } from '../common/dto/api-models.dto';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
@@ -25,7 +27,10 @@ import {
   UpdateSettingsMultipartDto,
 } from './dto/update-settings.dto';
 import { UserSettingsDto } from './dto/user-settings.dto';
+import { SETTINGS_PHOTO_ALLOWED_MIME_TYPES } from './settings-upload.config';
 import { SettingsService } from './settings.service';
+
+type MulterFileFilterCallback = (error: Error | null, accept: boolean) => void;
 
 @ApiTags('settings')
 @ApiBearerAuth()
@@ -43,7 +48,28 @@ export class SettingsController {
 
   @UseGuards(JwtAuthGuard)
   @Patch('me')
-  @UseInterceptors(FileInterceptor('photo'))
+  @UseInterceptors(
+    FileInterceptor('photo', {
+      limits: {
+        files: 1,
+        fileSize: Number(process.env.UPLOAD_MAX_SIZE_BYTES ?? 5 * 1024 * 1024),
+      },
+      fileFilter: (
+        _req: Request,
+        file: { mimetype: string },
+        cb: MulterFileFilterCallback,
+      ) => {
+        if (!SETTINGS_PHOTO_ALLOWED_MIME_TYPES.has(file.mimetype)) {
+          cb(
+            new BadRequestException('photo must be a JPEG, PNG, or WebP image'),
+            false,
+          );
+          return;
+        }
+        cb(null, true);
+      },
+    }),
+  )
   @ApiConsumes('multipart/form-data')
   @ApiBody({ type: UpdateSettingsMultipartDto })
   @ApiOkResponse({ type: UserSettingsDto })
