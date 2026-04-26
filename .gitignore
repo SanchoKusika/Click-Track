@@ -14,6 +14,7 @@ swagger.json
 .env
 .env.*
 !.env.example
+!.env.docker.example
 
 # IDE/system files
 .idea/

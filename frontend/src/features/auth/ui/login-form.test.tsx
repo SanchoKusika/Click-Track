@@ -31,7 +31,6 @@ describe('LoginForm', () => {
     localStorage.clear();
     useSessionStore.setState({
       accessToken: null,
-      refreshToken: null,
       user: null,
       hasHydrated: true,
       isBootstrapping: false,
@@ -39,7 +38,6 @@ describe('LoginForm', () => {
 
     mockLogin.mockResolvedValue({
       accessToken: 'token',
-      refreshToken: 'refresh',
       user: {
         id: 'mentor-1',
         email: 'mentor@click.local',

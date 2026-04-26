@@ -54,8 +54,7 @@ describe('AppRouter', () => {
     localStorage.clear();
     useSessionStore.setState({
       accessToken: null,
-      refreshToken: null,
-      user: null,
+user: null,
       hasHydrated: true,
       isBootstrapping: false,
     });
@@ -69,8 +68,7 @@ describe('AppRouter', () => {
   it('renders mentor dashboard for mentor role', async () => {
     useSessionStore.setState({
       accessToken: 'token',
-      refreshToken: 'refresh',
-      user: {
+user: {
         id: 'mentor-1',
         email: 'mentor@click.local',
         fullName: 'Mentor One',
@@ -89,8 +87,7 @@ describe('AppRouter', () => {
   it('renders all interns page for mentor role', async () => {
     useSessionStore.setState({
       accessToken: 'token',
-      refreshToken: 'refresh',
-      user: {
+user: {
         id: 'mentor-1',
         email: 'mentor@click.local',
         fullName: 'Mentor One',
@@ -109,8 +106,7 @@ describe('AppRouter', () => {
   it('redirects to role home when role mismatches route', async () => {
     useSessionStore.setState({
       accessToken: 'token',
-      refreshToken: 'refresh',
-      user: {
+user: {
         id: 'intern-1',
         email: 'intern@click.local',
         fullName: 'Intern One',
@@ -131,8 +127,7 @@ describe('AppRouter', () => {
   it('redirects intern away from mentor all interns route', async () => {
     useSessionStore.setState({
       accessToken: 'token',
-      refreshToken: 'refresh',
-      user: {
+user: {
         id: 'intern-1',
         email: 'intern@click.local',
         fullName: 'Intern One',

@@ -1,15 +1,17 @@
 import { render, waitFor } from '@testing-library/react';
 import { useSessionStore } from '@entities/session';
-import { authControllerRefresh, usersControllerMe } from '@shared/api/generated_api';
+import { refreshAccessToken } from '@shared/api/auth';
+import { usersControllerMe } from '@shared/api/generated_api';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { SessionBootstrap } from './session-bootstrap';
 
-vi.mock('@shared/api/generated_api', () => ({
-  authControllerRefresh: vi.fn(),
-  usersControllerMe: vi.fn(),
+vi.mock('@shared/api/auth', () => ({
+  refreshAccessToken: vi.fn(),
 }));
 
-const STORAGE_KEY = 'click_intern_session';
+vi.mock('@shared/api/generated_api', () => ({
+  usersControllerMe: vi.fn(),
+}));
 
 const mentorUser = {
   id: 'mentor-1',
@@ -21,10 +23,8 @@ const mentorUser = {
 
 describe('SessionBootstrap', () => {
   beforeEach(() => {
-    localStorage.clear();
     useSessionStore.setState({
       accessToken: null,
-      refreshToken: null,
       user: null,
       hasHydrated: false,
       isBootstrapping: false,
@@ -32,7 +32,9 @@ describe('SessionBootstrap', () => {
     vi.clearAllMocks();
   });
 
-  it('hydrates immediately when there is no persisted session', async () => {
+  it('clears session when refresh fails (guest)', async () => {
+    vi.mocked(refreshAccessToken).mockRejectedValueOnce(new Error('unauthorized'));
+
     render(
       <SessionBootstrap>
         <div>content</div>
@@ -44,19 +46,16 @@ describe('SessionBootstrap', () => {
       expect(useSessionStore.getState().isBootstrapping).toBe(false);
     });
 
+    expect(useSessionStore.getState().accessToken).toBeNull();
+    expect(useSessionStore.getState().user).toBeNull();
     expect(vi.mocked(usersControllerMe)).not.toHaveBeenCalled();
-    expect(vi.mocked(authControllerRefresh)).not.toHaveBeenCalled();
   });
 
-  it('loads current user when access token is persisted', async () => {
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({
-        accessToken: 'access-token',
-        refreshToken: 'refresh-token',
-        user: null,
-      })
-    );
+  it('hydrates session from cookie-based refresh', async () => {
+    vi.mocked(refreshAccessToken).mockResolvedValueOnce({
+      accessToken: 'access-token',
+      user: mentorUser,
+    });
     vi.mocked(usersControllerMe).mockResolvedValueOnce(mentorUser);
 
     render(
@@ -66,30 +65,18 @@ describe('SessionBootstrap', () => {
     );
 
     await waitFor(() => {
-      expect(vi.mocked(usersControllerMe)).toHaveBeenCalledTimes(1);
+      expect(useSessionStore.getState().accessToken).toBe('access-token');
       expect(useSessionStore.getState().user?.id).toBe('mentor-1');
       expect(useSessionStore.getState().hasHydrated).toBe(true);
     });
-
-    expect(vi.mocked(authControllerRefresh)).not.toHaveBeenCalled();
   });
 
-  it('refreshes token and retries user fetch when /users/me fails', async () => {
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({
-        accessToken: 'stale-access',
-        refreshToken: 'refresh-token',
-        user: null,
-      })
-    );
-
-    vi.mocked(usersControllerMe).mockRejectedValueOnce(new Error('unauthorized')).mockResolvedValueOnce(mentorUser);
-    vi.mocked(authControllerRefresh).mockResolvedValueOnce({
-      accessToken: 'new-access',
-      refreshToken: 'new-refresh',
+  it('keeps refresh user when /users/me fails', async () => {
+    vi.mocked(refreshAccessToken).mockResolvedValueOnce({
+      accessToken: 'access-token',
       user: mentorUser,
     });
+    vi.mocked(usersControllerMe).mockRejectedValueOnce(new Error('me failed'));
 
     render(
       <SessionBootstrap>
@@ -98,45 +85,9 @@ describe('SessionBootstrap', () => {
     );
 
     await waitFor(() => {
-      expect(vi.mocked(authControllerRefresh)).toHaveBeenCalledWith({
-        refreshToken: 'refresh-token',
-      });
-      expect(vi.mocked(usersControllerMe)).toHaveBeenCalledTimes(2);
-      expect(useSessionStore.getState().accessToken).toBe('new-access');
-      expect(useSessionStore.getState().refreshToken).toBe('new-refresh');
+      expect(useSessionStore.getState().accessToken).toBe('access-token');
       expect(useSessionStore.getState().user?.id).toBe('mentor-1');
       expect(useSessionStore.getState().hasHydrated).toBe(true);
-      expect(useSessionStore.getState().isBootstrapping).toBe(false);
     });
-  });
-
-  it('clears session when both me and refresh requests fail', async () => {
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({
-        accessToken: 'stale-access',
-        refreshToken: 'refresh-token',
-        user: mentorUser,
-      })
-    );
-
-    vi.mocked(usersControllerMe).mockRejectedValueOnce(new Error('unauthorized'));
-    vi.mocked(authControllerRefresh).mockRejectedValueOnce(new Error('refresh failed'));
-
-    render(
-      <SessionBootstrap>
-        <div>content</div>
-      </SessionBootstrap>
-    );
-
-    await waitFor(() => {
-      expect(useSessionStore.getState().accessToken).toBeNull();
-      expect(useSessionStore.getState().refreshToken).toBeNull();
-      expect(useSessionStore.getState().user).toBeNull();
-      expect(useSessionStore.getState().hasHydrated).toBe(true);
-      expect(useSessionStore.getState().isBootstrapping).toBe(false);
-    });
-
-    expect(localStorage.getItem(STORAGE_KEY)).toBeNull();
   });
 });

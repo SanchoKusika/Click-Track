@@ -31,7 +31,6 @@ export interface PublicUserDto {
 
 export interface AuthTokensResponseDto {
   accessToken: string;
-  refreshToken: string;
   user: PublicUserDto;
 }
 
@@ -41,10 +40,6 @@ export interface ApiErrorResponseDto {
   statusCode: number;
   error: string;
   message: ApiErrorResponseDtoMessage;
-}
-
-export interface RefreshTokenDto {
-  refreshToken: string;
 }
 
 export interface LogoutResponseDto {
@@ -304,12 +299,10 @@ export const authControllerLogin = (loginDto: LoginDto) => {
   });
 };
 
-export const authControllerRefresh = (refreshTokenDto: RefreshTokenDto) => {
+export const authControllerRefresh = () => {
   return customInstance<AuthTokensResponseDto>({
     url: `/auth/refresh`,
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    data: refreshTokenDto,
   });
 };
 

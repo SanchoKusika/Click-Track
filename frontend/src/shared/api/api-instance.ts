@@ -5,7 +5,14 @@ const API_BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 
 export const apiInstance = axios.create({
   baseURL: API_BASE_URL,
+  withCredentials: true,
 });
+
+let accessTokenGetter: () => string | null = () => null;
+
+export function setAccessTokenGetter(getter: () => string | null): void {
+  accessTokenGetter = getter;
+}
 
 function getApiOrigin() {
   const appOrigin = typeof window !== 'undefined' ? window.location.origin : 'http://localhost';
@@ -36,23 +43,13 @@ export function resolveApiAssetUrl(value: string | null | undefined): string | n
 }
 
 apiInstance.interceptors.request.use(config => {
-  const sessionRaw = localStorage.getItem('click_intern_session');
+  const token = accessTokenGetter();
 
-  if (!sessionRaw) {
-    return config;
-  }
-
-  try {
-    const session = JSON.parse(sessionRaw) as { accessToken?: string | null };
-
-    if (session.accessToken) {
-      config.headers = {
-        ...(config.headers ?? {}),
-        Authorization: `Bearer ${session.accessToken}`,
-      } as typeof config.headers;
-    }
-  } catch {
-    localStorage.removeItem('click_intern_session');
+  if (token) {
+    config.headers = {
+      ...(config.headers ?? {}),
+      Authorization: `Bearer ${token}`,
+    } as typeof config.headers;
   }
 
   return config;
