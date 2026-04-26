@@ -143,44 +143,22 @@ export class UsersService {
           create: { userId: id, mentorId: payload.mentorId ?? '' },
         });
       } else if (existing.internProfile) {
-        await tx.assessment.deleteMany({
-          where: { internId: existing.internProfile.id },
-        });
         await tx.internProfile.delete({ where: { userId: id } });
       }
       return user;
     });
   }
 
-  delete(id: string) {
-    return this.prisma.$transaction(async (tx) => {
-      const existing = await tx.user.findUnique({
-        where: { id },
-        include: { internProfile: true },
-      });
-
-      if (!existing) {
-        throw new NotFoundException('User not found');
-      }
-
-      if (existing.internProfile) {
-        await tx.assessment.deleteMany({
-          where: { internId: existing.internProfile.id },
-        });
-        await tx.internProfile.delete({ where: { userId: id } });
-      }
-
-      await tx.assessment.deleteMany({ where: { mentorId: id } });
-      return tx.user.delete({
-        where: { id },
-        select: {
-          id: true,
-          email: true,
-          fullName: true,
-          role: true,
-          createdAt: true,
-        },
-      });
+  async delete(id: string) {
+    return this.prisma.user.delete({
+      where: { id },
+      select: {
+        id: true,
+        email: true,
+        fullName: true,
+        role: true,
+        createdAt: true,
+      },
     });
   }
 }

@@ -10,7 +10,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 
-import { SurveyTarget } from '../../common/enums/survey-target.enum';
+import { SurveyTarget } from '@prisma/client';
 
 export { SurveyTarget };
 

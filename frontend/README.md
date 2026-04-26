@@ -234,6 +234,5 @@ npm run gen:api --workspace frontend
 
 ## Важные ограничения
 
-- Есть legacy-остатки, которые постепенно вычищаются (например `src/entities/auth`).
 - `search`, `notifications`, `settings`, `support` в layout сейчас UI-only (без бизнес-логики).
 - При изменениях OpenAPI обязательно перегенерировать `generated_api.ts`, иначе типы на фронте устареют.

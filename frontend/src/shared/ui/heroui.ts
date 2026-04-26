@@ -1,7 +1,9 @@
-import type { ComponentType, ReactNode } from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import {
   Avatar as HeroAvatar,
+  Breadcrumbs as HeroBreadcrumbs,
+  BreadcrumbsItem as HeroBreadcrumbsItem,
   Button as HeroButton,
   Card as HeroCard,
   CardContent as HeroCardContent,
@@ -19,26 +21,18 @@ import {
   Table as HeroTable,
   TextArea as HeroTextArea,
   TextField as HeroTextField,
-  Tooltip as HeroTooltip,
   ToastProvider as HeroToastProvider,
-  Breadcrumbs as HeroBreadcrumbs,
-  BreadcrumbsItem as HeroBreadcrumbsItem,
-  ToggleButtonGroup as HeroToggleButtonGroup,
   ToggleButton as HeroToggleButton,
+  ToggleButtonGroup as HeroToggleButtonGroup,
+  Tooltip as HeroTooltip,
   toast,
 } from '@heroui/react';
 
-type LooseProps = Record<string, unknown> & { children?: unknown };
-type LooseComponent<T = LooseProps> = ComponentType<T>;
-type LooseCompoundComponent = LooseComponent<LooseProps> & {
-  [key: string]: LooseComponent<LooseProps>;
-};
-
-type AvatarCompatProps = LooseProps & {
+type AvatarCompatProps = Omit<ComponentProps<typeof HeroAvatar>, 'children'> & {
   src?: string;
   name?: string;
   alt?: string;
-  className?: string;
+  children?: ReactNode;
 };
 
 function getAvatarInitials(name: string | undefined): string {
@@ -47,7 +41,6 @@ function getAvatarInitials(name: string | undefined): string {
   }
 
   const parts = name.trim().split(/\s+/).filter(Boolean);
-
   if (!parts.length) {
     return '?';
   }
@@ -63,48 +56,42 @@ function getAvatarInitials(name: string | undefined): string {
 
 function AvatarCompat({ alt, children, name, src, ...props }: AvatarCompatProps) {
   if (children !== undefined && children !== null) {
-    return jsx(HeroAvatar, { ...props, children: children as ReactNode });
+    return jsx(HeroAvatar, { ...props, children });
   }
-
-  const fallbackLabel = typeof name === 'string' ? name : undefined;
 
   return jsxs(HeroAvatar, {
     ...props,
     children: [
       typeof src === 'string' && src.length > 0
-        ? jsx(HeroAvatar.Image, { alt: alt ?? fallbackLabel, src }, 'avatar-image')
+        ? jsx(HeroAvatar.Image, { alt: alt ?? name, src }, 'avatar-image')
         : null,
-      jsx(HeroAvatar.Fallback, { children: getAvatarInitials(fallbackLabel) }, 'avatar-fallback'),
+      jsx(HeroAvatar.Fallback, { children: getAvatarInitials(name) }, 'avatar-fallback'),
     ],
   });
 }
 
-export const RouterProvider = HeroRouterProvider as unknown as LooseComponent;
-export const Card = HeroCard as unknown as LooseComponent;
-export const CardHeader = HeroCardHeader as unknown as LooseComponent;
-export const CardContent = HeroCardContent as unknown as LooseComponent;
-export const CardFooter = HeroCardFooter as unknown as LooseComponent;
-export const Button = HeroButton as unknown as LooseComponent;
-export const Chip = HeroChip as unknown as LooseComponent;
-export const Input = HeroInput as unknown as LooseComponent;
-export const Avatar = Object.assign(AvatarCompat as unknown as LooseComponent, {
-  Root: HeroAvatar.Root as unknown as LooseComponent,
-  Image: HeroAvatar.Image as unknown as LooseComponent,
-  Fallback: HeroAvatar.Fallback as unknown as LooseComponent,
-}) as unknown as LooseCompoundComponent;
-export const Tooltip = HeroTooltip as unknown as LooseComponent;
-export const Skeleton = HeroSkeleton as unknown as LooseComponent;
-export const ToastProvider = HeroToastProvider as unknown as LooseComponent;
-export { toast };
-export const Select = HeroSelect as unknown as LooseCompoundComponent;
-export const Table = HeroTable as unknown as LooseCompoundComponent;
-export const ListBox = HeroListBox as unknown as LooseCompoundComponent;
-export const FieldError = HeroFieldError as unknown as LooseComponent;
-export const InputGroup = HeroInputGroup as unknown as LooseCompoundComponent;
-export const Label = HeroLabel as unknown as LooseComponent;
-export const TextArea = HeroTextArea as unknown as LooseComponent;
-export const TextField = HeroTextField as unknown as LooseComponent;
-export const Breadcrumbs = HeroBreadcrumbs;
+export const Avatar = AvatarCompat;
 export const BreadcrumbItem = HeroBreadcrumbsItem;
-export const ToggleButtonGroup = HeroToggleButtonGroup as unknown as LooseCompoundComponent;
-export const ToggleButton = HeroToggleButton as unknown as LooseCompoundComponent;
+export const Breadcrumbs = HeroBreadcrumbs;
+export const Button = HeroButton;
+export const Card = HeroCard;
+export const CardContent = HeroCardContent;
+export const CardFooter = HeroCardFooter;
+export const CardHeader = HeroCardHeader;
+export const Chip = HeroChip;
+export const FieldError = HeroFieldError;
+export const Input = HeroInput;
+export const InputGroup = HeroInputGroup;
+export const Label = HeroLabel;
+export const ListBox = HeroListBox;
+export const RouterProvider = HeroRouterProvider;
+export const Select = HeroSelect;
+export const Skeleton = HeroSkeleton;
+export const Table = HeroTable;
+export const TextArea = HeroTextArea;
+export const TextField = HeroTextField;
+export const ToastProvider = HeroToastProvider;
+export const ToggleButton = HeroToggleButton;
+export const ToggleButtonGroup = HeroToggleButtonGroup;
+export const Tooltip = HeroTooltip;
+export { toast };
