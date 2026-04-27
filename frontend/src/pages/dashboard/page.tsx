@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMentorInternsQuery } from '@entities/mentor';
 import { useTranslation } from 'react-i18next';
@@ -17,15 +18,17 @@ export function DashboardPage() {
   const internsQuery = useMentorInternsQuery();
   const navigate = useNavigate();
   const interns = internsQuery.data ?? [];
-  const totalReviews = interns.reduce((sum, item) => sum + item.assessments.length, 0);
-  const averageScore = totalReviews
-    ? (
-        interns.reduce(
-          (sum, item) => sum + item.assessments.reduce((inner, assessment) => inner + assessment.score, 0),
-          0
-        ) / totalReviews
-      ).toFixed(2)
-    : '0.00';
+  const { totalReviews, averageScore } = useMemo(() => {
+    const total = interns.reduce((sum, item) => sum + item.assessments.length, 0);
+    const sumScores = interns.reduce(
+      (sum, item) => sum + item.assessments.reduce((inner, assessment) => inner + assessment.score, 0),
+      0
+    );
+    return {
+      totalReviews: total,
+      averageScore: total ? (sumScores / total).toFixed(2) : '0.00',
+    };
+  }, [interns]);
   return (
     <section className={styles.pageContainer}>
       <div className={styles.headerCard}>

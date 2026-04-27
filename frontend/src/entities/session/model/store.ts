@@ -1,5 +1,10 @@
 import { create } from 'zustand';
-import { setAccessTokenGetter } from '@shared/api/api-instance';
+import {
+  setAccessTokenGetter,
+  setRefreshHandler,
+  setSessionExpiredHandler,
+} from '@shared/api/api-instance';
+import { refreshAccessToken } from '@shared/api/auth';
 import type { SessionState } from './types';
 
 export const useSessionStore = create<SessionState>(set => ({
@@ -24,3 +29,16 @@ export const useSessionStore = create<SessionState>(set => ({
 }));
 
 setAccessTokenGetter(() => useSessionStore.getState().accessToken);
+
+setRefreshHandler(async () => {
+  const tokens = await refreshAccessToken();
+  useSessionStore.getState().setSession({
+    accessToken: tokens.accessToken,
+    user: tokens.user,
+  });
+  return tokens.accessToken;
+});
+
+setSessionExpiredHandler(() => {
+  useSessionStore.getState().clearSession();
+});

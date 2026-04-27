@@ -8,22 +8,12 @@
     "build": "vite build",
     "lint": "eslint . --ignore-pattern src/shared/api/generated_api.ts",
     "lint:fix": "eslint src --fix --ignore-pattern src/shared/api/generated_api.ts && npm run format",
-    "typecheck": "tsc --noEmit --incremental false",
+    "typecheck": "tsc -b --noEmit",
     "format": "prettier -w .",
     "format:check": "prettier -c .",
     "gen:api": "node ./scripts/gen-api.cjs",
     "preview": "vite preview",
-    "test": "vitest run",
-    "prepare": "husky"
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier -w"
-    ],
-    "*.{json,md,css}": [
-      "prettier -w"
-    ]
+    "test": "vitest run"
   },
   "dependencies": {
     "@gravity-ui/icons": "2.18.0",
@@ -73,9 +63,7 @@
     "eslint-plugin-unused-imports": "^4.4.1",
     "eslint-plugin-vitest": "^0.5.4",
     "globals": "^17.4.0",
-    "husky": "^9.1.7",
     "jsdom": "^29.0.1",
-    "lint-staged": "^16.4.0",
     "orval": "^7.13.2",
     "prettier": "^3.8.1",
     "tailwindcss": "^4.2.2",

@@ -5,6 +5,7 @@ import { useLogout } from '@features/auth/model/use-logout';
 import { APP_ROUTES } from '@shared/config/routes';
 import { useTheme } from '@shared/lib/use-theme';
 import { Button } from '@shared/ui/heroui';
+import { ErrorBoundary } from '@shared/ui/error-boundary';
 import { useTranslation } from 'react-i18next';
 import { getNavItems, getRoleChipLabel, getRoleLabel, getSelectedLanguage, getTopbarTitle } from './app-layout.helpers';
 import { LayoutHeader } from './layout-header';
@@ -64,7 +65,9 @@ export function AppLayout() {
           />
 
           <div className={styles.pageContent}>
-            <Outlet />
+            <ErrorBoundary>
+              <Outlet />
+            </ErrorBoundary>
           </div>
           <div className={styles.mobileFooter}>
             <Button fullWidth onPress={logout} radius="lg" variant="outline">

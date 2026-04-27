@@ -3,7 +3,7 @@
 Список технического долга и улучшений, разбитый на фазы по приоритету.
 Фазы выполняются последовательно — каждая опирается на предыдущую.
 
-**Прогресс:** Фазы 1–3 завершены · Фазы 4–6 запланированы
+**Прогресс:** Фазы 1–4 завершены · Фазы 5–6 запланированы
 
 ---
 
@@ -53,16 +53,16 @@
 
 ## Фаза 4. Frontend-обвязка
 
-> **Статус:** запланирована
+> **Статус:** завершена
 > Устойчивость UX к 401, единая стратегия кэширования, защита от падений.
 
-- [ ] **21.** Axios refresh-interceptor: `401` → попытка refresh → retry оригинального запроса. С единой очередью, чтобы не было гонок параллельных рефрешей.
-- [ ] **22.** `Error Boundary` на уровне `AppLayout` и pages.
-- [ ] **23.** `QueryClient` defaults: `staleTime`, `retry`, `refetchOnWindowFocus`, глобальный `onError` → toast.
-- [ ] **24.** Поднять `QueryClient` в `useState(() => new QueryClient(...))` или на module level.
-- [ ] **25.** Доступ к access-токену из interceptor — через `useSessionStore.getState().accessToken`, не `localStorage`.
-- [ ] **26.** Dashboard-метрики — либо мемоизировать, либо считать на бэке.
-- [ ] **27.** `Husky` + `lint-staged` в корне репо, перекрыть оба workspace.
+- [x] **21.** Axios response-interceptor: `401` → singleton `inFlightRefresh` → retry оригинального запроса. Параллельные 401 ждут одного и того же refresh. `setRefreshHandler`/`setSessionExpiredHandler` регистрируются из `entities/session/model/store.ts`. `/auth/refresh|login|logout` исключены из retry-логики.
+- [x] **22.** `ErrorBoundary` (`shared/ui/error-boundary.tsx`) обёрнут вокруг `<Outlet />` в `AppLayout`. Падения страницы не уводят шапку/сайдбар.
+- [x] **23.** `QueryClient` defaults: `staleTime: 30s`, `retry: 1` (но не на 401), `refetchOnWindowFocus: false`. Глобальный `QueryCache.onError` + `MutationCache.onError` → `toast.danger` (skip 401, его обрабатывает refresh-interceptor).
+- [x] **24.** `QueryClient` уже на module level в `app/providers/app-provider.tsx` — не пересоздаётся при ре-рендере.
+- [x] **25.** Сделано в Phase 1: interceptor читает токен через `setAccessTokenGetter(() => useSessionStore.getState().accessToken)`. Без `localStorage`.
+- [x] **26.** Dashboard-метрики (`totalReviews`, `averageScore`) обёрнуты в `useMemo([interns])`.
+- [x] **27.** `husky` и `lint-staged` подняты в корневой `package.json`. Один `.husky/pre-commit` на оба workspace. lint-staged конфиг покрывает `backend/**/*.ts`, `frontend/**/*.{ts,tsx,js,jsx}` и общие `*.{json,md,css,yml}`. Требуется `npm install` после pull для активации хука. Заодно починен `frontend/package.json` typecheck (`tsc -b --noEmit`).
 
 ---
 
