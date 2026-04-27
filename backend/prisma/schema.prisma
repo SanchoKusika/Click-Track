@@ -33,6 +33,7 @@ model User {
   assessmentsGiven Assessment[]   @relation("MentorAssessments")
   surveyResponses  SurveyResponse[]
 
+  @@index([role])
   @@map("users")
 }
 
@@ -70,6 +71,8 @@ model Assessment {
   criterion   Criterion     @relation(fields: [criterionId], references: [id])
 
   @@index([internId, createdAt])
+  @@index([mentorId])
+  @@index([criterionId])
   @@map("assessments")
 }
 

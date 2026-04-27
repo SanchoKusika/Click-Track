@@ -2,16 +2,17 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   assessmentsControllerAssignIntern,
   assessmentsControllerCreate,
-  assessmentsControllerListAllInterns,
   assessmentsControllerListMentorInterns,
   assessmentsControllerMentorInternDetail,
 } from '@shared/api/generated_api';
+import { customInstance } from '@shared/api/api-instance';
 import type {
   CreateAssessmentPayload,
   MentorAllInternListItem,
   MentorInternDetail,
   MentorInternListItem,
 } from './types';
+import type { Paginated, PaginationParams } from '@shared/api/pagination';
 
 export function useMentorInternsQuery() {
   return useQuery({
@@ -41,10 +42,15 @@ export function useCreateAssessmentMutation(internId: string) {
     },
   });
 }
-export function useAllInternsQuery() {
+export function useAllInternsQuery(params: PaginationParams = {}) {
   return useQuery({
-    queryKey: ['all-interns'],
-    queryFn: async () => (await assessmentsControllerListAllInterns()) as MentorAllInternListItem[],
+    queryKey: ['all-interns', params.page ?? 1, params.pageSize ?? 20],
+    queryFn: () =>
+      customInstance<Paginated<MentorAllInternListItem>>({
+        method: 'GET',
+        url: '/assessments/mentor/interns/all',
+        params,
+      }),
   });
 }
 

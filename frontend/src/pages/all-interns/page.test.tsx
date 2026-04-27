@@ -29,36 +29,41 @@ describe('ListAllInternsPage', () => {
       mutate: mutateMock,
     });
     useAllInternsQueryMock.mockReturnValue({
-      data: [
-        {
-          id: 'intern-1',
-          fullName: 'Intern One',
-          email: 'intern1@click.local',
-          internProfile: null,
-        },
-        {
-          id: 'intern-2',
-          fullName: 'Intern Two',
-          email: 'intern2@click.local',
-          internProfile: {
-            id: 'profile-2',
-            mentorId: 'mentor-1',
-            mentor: { id: 'mentor-1', fullName: 'Mentor One', email: 'mentor1@click.local' },
-            assessments: [],
+      data: {
+        items: [
+          {
+            id: 'intern-1',
+            fullName: 'Intern One',
+            email: 'intern1@click.local',
+            internProfile: null,
           },
-        },
-        {
-          id: 'intern-3',
-          fullName: 'Intern Three',
-          email: 'intern3@click.local',
-          internProfile: {
-            id: 'profile-3',
-            mentorId: 'mentor-2',
-            mentor: { id: 'mentor-2', fullName: 'Mentor Two', email: 'mentor2@click.local' },
-            assessments: [],
+          {
+            id: 'intern-2',
+            fullName: 'Intern Two',
+            email: 'intern2@click.local',
+            internProfile: {
+              id: 'profile-2',
+              mentorId: 'mentor-1',
+              mentor: { id: 'mentor-1', fullName: 'Mentor One', email: 'mentor1@click.local' },
+              assessments: [],
+            },
           },
-        },
-      ],
+          {
+            id: 'intern-3',
+            fullName: 'Intern Three',
+            email: 'intern3@click.local',
+            internProfile: {
+              id: 'profile-3',
+              mentorId: 'mentor-2',
+              mentor: { id: 'mentor-2', fullName: 'Mentor Two', email: 'mentor2@click.local' },
+              assessments: [],
+            },
+          },
+        ],
+        total: 3,
+        page: 1,
+        pageSize: 20,
+      },
       isLoading: false,
       isError: false,
     });

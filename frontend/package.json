@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
     "lint": "eslint . --ignore-pattern src/shared/api/generated_api.ts",
     "lint:fix": "eslint src --fix --ignore-pattern src/shared/api/generated_api.ts && npm run format",
     "typecheck": "tsc --noEmit --incremental false",

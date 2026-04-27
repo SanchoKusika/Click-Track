@@ -2,13 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { PaginationQueryDto } from '../common/dto/pagination.dto';
 
 @Injectable()
 export class AdminService {
   constructor(private readonly usersService: UsersService) {}
 
-  listUsers() {
-    return this.usersService.listAll();
+  listUsers(query: PaginationQueryDto) {
+    return this.usersService.listAll(query);
   }
 
   listMentors() {

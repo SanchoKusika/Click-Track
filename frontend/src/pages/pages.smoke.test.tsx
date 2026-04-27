@@ -112,7 +112,7 @@ vi.mock('@entities/intern', () => ({
 
 vi.mock('@entities/admin', () => ({
   useAdminUsersQuery: () => ({
-    data: adminUsersData,
+    data: { items: adminUsersData, total: adminUsersData.length, page: 1, pageSize: 20 },
     isLoading: false,
     error: null,
   }),

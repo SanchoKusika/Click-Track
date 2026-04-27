@@ -33,7 +33,7 @@ const ListAllInternsPage: React.FC = () => {
     });
   };
 
-  const allInterns = interns ?? [];
+  const allInterns = interns?.items ?? [];
   const withProfile = allInterns.filter((i: MentorAllInternListItem) => i.internProfile !== null);
   const withoutProfile = allInterns.filter((i: MentorAllInternListItem) => i.internProfile === null);
   const totalAssessments = withProfile.reduce(

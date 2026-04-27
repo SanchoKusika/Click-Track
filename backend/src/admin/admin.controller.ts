@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import {
@@ -28,11 +29,12 @@ import { Role } from '@prisma/client';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import {
-  AdminUserDto,
   ApiErrorResponseDto,
   MentorBriefDto,
+  PaginatedAdminUsersDto,
   PublicUserDto,
 } from '../common/dto/api-models.dto';
+import { PaginationQueryDto } from '../common/dto/pagination.dto';
 
 @ApiTags('admin')
 @ApiBearerAuth()
@@ -43,11 +45,11 @@ export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
   @Get('users')
-  @ApiOkResponse({ type: [AdminUserDto] })
+  @ApiOkResponse({ type: PaginatedAdminUsersDto })
   @ApiUnauthorizedResponse({ type: ApiErrorResponseDto })
   @ApiForbiddenResponse({ type: ApiErrorResponseDto })
-  listUsers() {
-    return this.adminService.listUsers();
+  listUsers(@Query() query: PaginationQueryDto) {
+    return this.adminService.listUsers(query);
   }
 
   @Get('mentors')

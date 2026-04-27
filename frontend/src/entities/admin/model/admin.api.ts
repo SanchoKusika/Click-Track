@@ -3,17 +3,23 @@ import {
   adminControllerCreateUser,
   adminControllerDeleteUser,
   adminControllerListMentors,
-  adminControllerListUsers,
   adminControllerUpdateUser,
 } from '@shared/api/generated_api';
+import { customInstance } from '@shared/api/api-instance';
 import { useTranslation } from 'react-i18next';
 import { toast } from '@shared/ui/heroui';
 import type { AdminUser, MentorOption, UserFormValues, UserUpdateValues } from './types';
+import type { Paginated, PaginationParams } from '@shared/api/pagination';
 
-export function useAdminUsersQuery() {
+export function useAdminUsersQuery(params: PaginationParams = {}) {
   return useQuery({
-    queryKey: ['admin-users'],
-    queryFn: async () => (await adminControllerListUsers()) as AdminUser[],
+    queryKey: ['admin-users', params.page ?? 1, params.pageSize ?? 20],
+    queryFn: () =>
+      customInstance<Paginated<AdminUser>>({
+        method: 'GET',
+        url: '/admin/users',
+        params,
+      }),
   });
 }
 
