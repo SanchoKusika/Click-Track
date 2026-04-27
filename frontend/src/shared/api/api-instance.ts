@@ -14,6 +14,18 @@ export function setAccessTokenGetter(getter: () => string | null): void {
   accessTokenGetter = getter;
 }
 
+let refreshHandler: (() => Promise<string | null>) | null = null;
+let sessionExpiredHandler: (() => void) | null = null;
+let inFlightRefresh: Promise<string | null> | null = null;
+
+export function setRefreshHandler(handler: () => Promise<string | null>): void {
+  refreshHandler = handler;
+}
+
+export function setSessionExpiredHandler(handler: () => void): void {
+  sessionExpiredHandler = handler;
+}
+
 function getApiOrigin() {
   const appOrigin = typeof window !== 'undefined' ? window.location.origin : 'http://localhost';
 
@@ -54,6 +66,47 @@ apiInstance.interceptors.request.use(config => {
 
   return config;
 });
+
+type RetryableConfig = AxiosRequestConfig & { _retry?: boolean };
+
+function isAuthEndpoint(url: string | undefined): boolean {
+  if (!url) return false;
+  return url.includes('/auth/refresh') || url.includes('/auth/login') || url.includes('/auth/logout');
+}
+
+apiInstance.interceptors.response.use(
+  response => response,
+  async (error: AxiosError) => {
+    const config = error.config as RetryableConfig | undefined;
+    const status = error.response?.status;
+
+    if (status !== 401 || !config || config._retry || !refreshHandler || isAuthEndpoint(config.url)) {
+      throw error;
+    }
+
+    config._retry = true;
+
+    try {
+      if (!inFlightRefresh) {
+        inFlightRefresh = refreshHandler().finally(() => {
+          inFlightRefresh = null;
+        });
+      }
+
+      const newToken = await inFlightRefresh;
+
+      if (!newToken) {
+        sessionExpiredHandler?.();
+        throw error;
+      }
+
+      return apiInstance.request(config);
+    } catch (refreshError) {
+      sessionExpiredHandler?.();
+      throw refreshError instanceof Error ? refreshError : error;
+    }
+  }
+);
 
 export async function customInstance<T>(config: AxiosRequestConfig): Promise<T> {
   try {
