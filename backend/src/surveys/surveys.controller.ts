@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import {
@@ -22,9 +23,10 @@ import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../common/guards/roles.guard';
 import {
   MySurveyDto,
+  PaginatedSurveyResponsesDto,
   SurveyListItemDto,
-  SurveyResponseViewDto,
 } from '../common/dto/api-models.dto';
+import { PaginationQueryDto } from '../common/dto/pagination.dto';
 import { CreateSurveyDto } from './dto/create-survey.dto';
 import { SubmitSurveyResponseDto } from './dto/submit-survey-response.dto';
 import { SurveysService } from './surveys.service';
@@ -49,9 +51,12 @@ export class SurveysController {
   @Get('responses/:surveyId')
   @Roles(Role.ADMIN)
   @ApiParam({ name: 'surveyId', type: String })
-  @ApiOkResponse({ type: [SurveyResponseViewDto] })
-  getResponses(@Param('surveyId') surveyId: string) {
-    return this.surveysService.getResponses(surveyId);
+  @ApiOkResponse({ type: PaginatedSurveyResponsesDto })
+  getResponses(
+    @Param('surveyId') surveyId: string,
+    @Query() query: PaginationQueryDto,
+  ) {
+    return this.surveysService.getResponses(surveyId, query);
   }
 
   @Get()

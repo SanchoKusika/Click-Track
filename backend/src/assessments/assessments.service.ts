@@ -7,6 +7,10 @@ import {
 import { Role } from '@prisma/client';
 import { PrismaService } from '../prisma.service';
 import { CreateAssessmentDto } from './dto/create-assessment.dto';
+import {
+  PaginationQueryDto,
+  resolvePagination,
+} from '../common/dto/pagination.dto';
 
 @Injectable()
 export class AssessmentsService {
@@ -83,29 +87,37 @@ export class AssessmentsService {
     };
   }
 
-  listAllInterns() {
-    return this.prisma.user.findMany({
-      where: { role: Role.INTERN },
-      select: {
-        id: true,
-        fullName: true,
-        email: true,
-        photoUrl: true,
-        internProfile: {
-          include: {
-            mentor: { select: { id: true, fullName: true, email: true } },
-            assessments: {
-              include: {
-                criterion: true,
-                mentor: { select: { id: true, fullName: true } },
+  async listAllInterns(query: PaginationQueryDto = {}) {
+    const { page, pageSize, skip, take } = resolvePagination(query);
+    const where = { role: Role.INTERN };
+    const [items, total] = await this.prisma.$transaction([
+      this.prisma.user.findMany({
+        where,
+        skip,
+        take,
+        select: {
+          id: true,
+          fullName: true,
+          email: true,
+          photoUrl: true,
+          internProfile: {
+            include: {
+              mentor: { select: { id: true, fullName: true, email: true } },
+              assessments: {
+                include: {
+                  criterion: true,
+                  mentor: { select: { id: true, fullName: true } },
+                },
+                orderBy: { createdAt: 'desc' },
               },
-              orderBy: { createdAt: 'desc' },
             },
           },
         },
-      },
-      orderBy: { fullName: 'asc' },
-    });
+        orderBy: { fullName: 'asc' },
+      }),
+      this.prisma.user.count({ where }),
+    ]);
+    return { items, total, page, pageSize };
   }
 
   async assignIntern(mentorId: string, internId: string) {

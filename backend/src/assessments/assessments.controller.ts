@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
@@ -24,7 +32,9 @@ import {
   MentorAllInternListItemDto,
   MentorInternDetailDto,
   MentorInternListItemDto,
+  PaginatedMentorAllInternsDto,
 } from '../common/dto/api-models.dto';
+import { PaginationQueryDto } from '../common/dto/pagination.dto';
 
 @ApiTags('assessments')
 @ApiBearerAuth()
@@ -35,11 +45,11 @@ export class AssessmentsController {
   constructor(private readonly assessmentsService: AssessmentsService) {}
 
   @Get('mentor/interns/all')
-  @ApiOkResponse({ type: [MentorAllInternListItemDto] })
+  @ApiOkResponse({ type: PaginatedMentorAllInternsDto })
   @ApiUnauthorizedResponse({ type: ApiErrorResponseDto })
   @ApiForbiddenResponse({ type: ApiErrorResponseDto })
-  listAllInterns() {
-    return this.assessmentsService.listAllInterns();
+  listAllInterns(@Query() query: PaginationQueryDto) {
+    return this.assessmentsService.listAllInterns(query);
   }
 
   @Get('mentor/interns')

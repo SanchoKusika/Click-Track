@@ -6,6 +6,10 @@ import {
 import { Role } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../prisma.service';
+import {
+  PaginationQueryDto,
+  resolvePagination,
+} from '../common/dto/pagination.dto';
 
 @Injectable()
 export class UsersService {
@@ -32,24 +36,31 @@ export class UsersService {
     });
   }
 
-  listAll() {
-    return this.prisma.user.findMany({
-      orderBy: { createdAt: 'desc' },
-      select: {
-        id: true,
-        email: true,
-        fullName: true,
-        role: true,
-        createdAt: true,
-        internProfile: {
-          select: {
-            id: true,
-            mentorId: true,
-            mentor: { select: { id: true, fullName: true, email: true } },
+  async listAll(query: PaginationQueryDto = {}) {
+    const { page, pageSize, skip, take } = resolvePagination(query);
+    const [items, total] = await this.prisma.$transaction([
+      this.prisma.user.findMany({
+        orderBy: { createdAt: 'desc' },
+        skip,
+        take,
+        select: {
+          id: true,
+          email: true,
+          fullName: true,
+          role: true,
+          createdAt: true,
+          internProfile: {
+            select: {
+              id: true,
+              mentorId: true,
+              mentor: { select: { id: true, fullName: true, email: true } },
+            },
           },
         },
-      },
-    });
+      }),
+      this.prisma.user.count(),
+    ]);
+    return { items, total, page, pageSize };
   }
 
   listMentors() {

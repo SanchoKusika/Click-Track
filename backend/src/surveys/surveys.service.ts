@@ -7,6 +7,10 @@ import { Role } from '@prisma/client';
 import { PrismaService } from '../prisma.service';
 import { CreateSurveyDto } from './dto/create-survey.dto';
 import { SubmitSurveyResponseDto } from './dto/submit-survey-response.dto';
+import {
+  PaginationQueryDto,
+  resolvePagination,
+} from '../common/dto/pagination.dto';
 
 @Injectable()
 export class SurveysService {
@@ -63,26 +67,32 @@ export class SurveysService {
     return { success: true };
   }
 
-  async getResponses(surveyId: string) {
+  async getResponses(surveyId: string, query: PaginationQueryDto = {}) {
     const survey = await this.prisma.survey.findUnique({
       where: { id: surveyId },
     });
     if (!survey) throw new NotFoundException('Survey not found');
 
-    const responses = await this.prisma.surveyResponse.findMany({
-      where: { surveyId },
-      include: {
-        respondent: {
-          include: {
-            internProfile: { include: { mentor: true } },
+    const { page, pageSize, skip, take } = resolvePagination(query);
+    const [responses, total] = await this.prisma.$transaction([
+      this.prisma.surveyResponse.findMany({
+        where: { surveyId },
+        skip,
+        take,
+        include: {
+          respondent: {
+            include: {
+              internProfile: { include: { mentor: true } },
+            },
           },
+          answers: { include: { question: true } },
         },
-        answers: { include: { question: true } },
-      },
-      orderBy: { createdAt: 'desc' },
-    });
+        orderBy: { createdAt: 'desc' },
+      }),
+      this.prisma.surveyResponse.count({ where: { surveyId } }),
+    ]);
 
-    return responses.map((r) => ({
+    const items = responses.map((r) => ({
       id: r.id,
       respondent: {
         id: r.respondent.id,
@@ -99,6 +109,8 @@ export class SurveysService {
       })),
       createdAt: r.createdAt,
     }));
+
+    return { items, total, page, pageSize };
   }
 
   async getMySurveys(userId: string, role: Role) {

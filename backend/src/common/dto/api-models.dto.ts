@@ -1,5 +1,17 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Role, SurveyTarget } from '@prisma/client';
+import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from './pagination.dto';
+
+class PaginationMetaDto {
+  @ApiProperty({ example: 42 })
+  total!: number;
+
+  @ApiProperty({ example: DEFAULT_PAGE })
+  page!: number;
+
+  @ApiProperty({ example: DEFAULT_PAGE_SIZE })
+  pageSize!: number;
+}
 
 export class ApiErrorResponseDto {
   @ApiProperty({ example: 400 })
@@ -329,4 +341,19 @@ export class SurveyResponseViewDto {
 
   @ApiProperty()
   createdAt!: Date;
+}
+
+export class PaginatedAdminUsersDto extends PaginationMetaDto {
+  @ApiProperty({ type: () => [AdminUserDto] })
+  items!: AdminUserDto[];
+}
+
+export class PaginatedMentorAllInternsDto extends PaginationMetaDto {
+  @ApiProperty({ type: () => [MentorAllInternListItemDto] })
+  items!: MentorAllInternListItemDto[];
+}
+
+export class PaginatedSurveyResponsesDto extends PaginationMetaDto {
+  @ApiProperty({ type: () => [SurveyResponseViewDto] })
+  items!: SurveyResponseViewDto[];
 }

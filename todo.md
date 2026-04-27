@@ -3,7 +3,7 @@
 Список технического долга и улучшений, разбитый на фазы по приоритету.
 Фазы выполняются последовательно — каждая опирается на предыдущую.
 
-**Прогресс:** Фазы 1–2 завершены · Фазы 3–6 запланированы
+**Прогресс:** Фазы 1–3 завершены · Фазы 4–6 запланированы
 
 ---
 
@@ -41,13 +41,13 @@
 
 ## Фаза 3. Качество данных и производительность
 
-> **Статус:** запланирована
+> **Статус:** завершена (ветка `data-quality`)
 > Лечение N+1 и линейного роста запросов на админ-экранах.
 
-- [ ] **17.** Переписать leaderboard на SQL-агрегацию (`groupBy` + `_avg`).
-- [ ] **18.** Пагинация (`take/skip` + `total`) в `admin/users`, `assessments/interns/all`, `surveys/responses`.
-- [ ] **19.** Индексы Prisma: `Assessment(mentorId)`, `Assessment(criterionId)` (если понадобятся), `User(role)`.
-- [ ] **20.** Один источник seed: оставить `seed.ts` + `ts-node` в `prisma:seed`, удалить `seed.js`.
+- [x] **17.** Leaderboard переписан на `prisma.assessment.groupBy({ by: ['internId'], _avg, _count })` + одиночный `findMany` по профилям. Ушёл N+1.
+- [x] **18.** Пагинация (`take/skip` + `total`) в `GET /admin/users`, `GET /assessments/mentor/interns/all`, `GET /surveys/responses/:surveyId`. Общий `PaginationQueryDto` (page/pageSize) и Paginated*Dto в swagger; фронт-хуки переведены на shape `{ items, total, page, pageSize }`.
+- [x] **19.** Индексы Prisma: `@@index([role])` на `User`, `@@index([mentorId])` и `@@index([criterionId])` на `Assessment`. Миграция `20260427120000_add_perf_indices`.
+- [x] **20.** Один источник seed: `seed.ts` + `ts-node` в `prisma:seed`, `seed.js` удалён.
 
 ---
 
@@ -90,3 +90,4 @@
 - [ ] **36.** Frontend integration-тесты: login → дашборд, защита роутов.
 - [ ] **37.** Документация env-переменных с разделением dev / staging / prod.
 - [ ] **38.** Postman/Insomnia collection или экспорт OpenAPI в `docs/`.
+- [ ] **39.** HeroUI v3 props migration. `npm run typecheck` ловит 75 ошибок несовместимости с v3 BETA: `radius` (Card/Button/Chip), `isLoading` (Button → `isPending`), `color` на Button, `variant="solid"|"flat"|"light"|"shadow"` (заменены на `primary|secondary|tertiary|outline|ghost|danger|danger-soft`), `Tooltip.content`, `Select.onChange` и `ToggleButtonGroup.onSelectionChange` принимают `Key`-типы. Долг скрывался сломанным скриптом (`tsc --noEmit --incremental false` молча печатал help). После Phase 3 скрипт исправлен (`tsc -b --noEmit`), а `npm run build` развязан от `tsc -b` (только `vite build`), чтобы TS-долг не блокировал прод. Вернуть `tsc -b` в build после миграции.

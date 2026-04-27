@@ -161,7 +161,7 @@ export function AdminUsersPage() {
           </CardHeader>
           <div className={styles.divider} />
           <CardContent className="gap-6 p-6">
-            {(users.data ?? []).length === 0 ? (
+            {(users.data?.items ?? []).length === 0 ? (
               <PanelState
                 description={t('admin.users.panelEmptyDescription')}
                 title={t('admin.users.panelEmptyTitle')}
@@ -178,7 +178,7 @@ export function AdminUsersPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {(users.data ?? []).map(user => (
+                    {(users.data?.items ?? []).map(user => (
                       <tr className={styles.tableRow} key={user.id}>
                         <td className={styles.tableCell}>
                           <div className="space-y-1">
@@ -209,7 +209,7 @@ export function AdminUsersPage() {
             )}
 
             <div className="space-y-4">
-              {(users.data ?? []).map(user => {
+              {(users.data?.items ?? []).map(user => {
                 const editingUser = editingUsers[user.id] ?? user;
 
                 return (

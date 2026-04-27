@@ -3,6 +3,7 @@ import { customInstance } from '@shared/api/api-instance';
 import { useTranslation } from 'react-i18next';
 import { toast } from '@shared/ui/heroui';
 import type { CreateSurveyPayload, MySurvey, SubmitSurveyPayload, SurveyListItem, SurveyResponseView } from './types';
+import type { Paginated, PaginationParams } from '@shared/api/pagination';
 
 export function useAdminSurveysQuery() {
   return useQuery({
@@ -38,13 +39,17 @@ export function useDeleteSurveyMutation() {
   });
 }
 
-export function useSurveyResponsesQuery(surveyId: string | null) {
+export function useSurveyResponsesQuery(
+  surveyId: string | null,
+  params: PaginationParams = {},
+) {
   return useQuery({
-    queryKey: ['survey-responses', surveyId],
+    queryKey: ['survey-responses', surveyId, params.page ?? 1, params.pageSize ?? 20],
     queryFn: () =>
-      customInstance<SurveyResponseView[]>({
+      customInstance<Paginated<SurveyResponseView>>({
         method: 'GET',
         url: `/surveys/responses/${surveyId}`,
+        params,
       }),
     enabled: !!surveyId,
   });

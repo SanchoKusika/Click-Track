@@ -24,7 +24,7 @@ export function ManageUsersPanel() {
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const mentorOptions = mentors.data ?? [];
-  const userList = users.data ?? [];
+  const userList = users.data?.items ?? [];
 
   const handleSave = useCallback(
     (editingUser: AdminUser) => {

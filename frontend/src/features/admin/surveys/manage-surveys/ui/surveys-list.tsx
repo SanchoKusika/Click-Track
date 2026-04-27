@@ -12,8 +12,10 @@ function SurveyResponsesPanel({ surveyId }: { surveyId: string }) {
   const { t } = useTranslation();
   const { data, isLoading } = useSurveyResponsesQuery(surveyId);
 
+  const items = data?.items ?? [];
+
   if (isLoading) return <p className="text-sm text-(--muted)">{t('admin.surveys.list.loadingResponses')}</p>;
-  if (!data?.length) {
+  if (!items.length) {
     return (
       <PanelState
         description={t('admin.surveys.list.noResponsesDescription')}
@@ -24,7 +26,7 @@ function SurveyResponsesPanel({ surveyId }: { surveyId: string }) {
 
   return (
     <div className="space-y-4">
-      {data.map(r => (
+      {items.map(r => (
         <Card className={styles.editCard} key={r.id} radius="xl">
           <CardContent className="p-5 space-y-4">
             <div className="flex items-center justify-between">
