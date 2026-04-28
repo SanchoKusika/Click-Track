@@ -1,0 +1,18 @@
+node_modules
+dist
+build
+coverage
+.next
+
+# Lock files — too large and managed by package managers
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Generated artifacts
+docs/openapi.json
+backend/swagger.json
+frontend/src/shared/api/generated_api.ts
+
+# Migrations
+backend/prisma/migrations

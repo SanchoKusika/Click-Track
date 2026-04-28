@@ -1,0 +1,2416 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthTokensResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "operationId": "AuthController_refresh",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthTokensResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "operationId": "AuthController_logout",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogoutResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/users/me": {
+      "get": {
+        "operationId": "UsersController_me",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicUserDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/admin/users": {
+      "get": {
+        "operationId": "AdminController_listUsers",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "default": 1,
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "example": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedAdminUsersDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      },
+      "post": {
+        "operationId": "AdminController_createUser",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicUserDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/admin/mentors": {
+      "get": {
+        "operationId": "AdminController_listMentors",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MentorBriefDto"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/admin/users/{id}": {
+      "patch": {
+        "operationId": "AdminController_updateUser",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicUserDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      },
+      "delete": {
+        "operationId": "AdminController_deleteUser",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicUserDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/assessments/mentor/interns/all": {
+      "get": {
+        "operationId": "AssessmentsController_listAllInterns",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "default": 1,
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "example": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedMentorAllInternsDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "assessments"
+        ]
+      }
+    },
+    "/assessments/mentor/interns": {
+      "get": {
+        "operationId": "AssessmentsController_listMentorInterns",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MentorInternListItemDto"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "assessments"
+        ]
+      }
+    },
+    "/assessments/mentor/interns/{internId}": {
+      "get": {
+        "operationId": "AssessmentsController_mentorInternDetail",
+        "parameters": [
+          {
+            "name": "internId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MentorInternDetailDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "assessments"
+        ]
+      }
+    },
+    "/assessments": {
+      "post": {
+        "operationId": "AssessmentsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAssessmentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssessmentResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "assessments"
+        ]
+      }
+    },
+    "/assessments/mentor/interns/{internId}/assign": {
+      "post": {
+        "operationId": "AssessmentsController_assignIntern",
+        "parameters": [
+          {
+            "name": "internId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MentorAllInternListItemDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "assessments"
+        ]
+      }
+    },
+    "/criteria": {
+      "get": {
+        "operationId": "CriteriaController_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CriterionResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "criteria"
+        ]
+      },
+      "post": {
+        "operationId": "CriteriaController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCriterionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CriterionResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "criteria"
+        ]
+      }
+    },
+    "/intern/me/assessments": {
+      "get": {
+        "operationId": "InternController_myAssessments",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AssessmentResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "intern"
+        ]
+      }
+    },
+    "/intern/leaderboard": {
+      "get": {
+        "operationId": "InternController_leaderboard",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LeaderboardEntryDto"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "intern"
+        ]
+      }
+    },
+    "/settings/me": {
+      "get": {
+        "operationId": "SettingsController_me",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserSettingsDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "settings"
+        ]
+      },
+      "patch": {
+        "operationId": "SettingsController_updateMe",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSettingsMultipartDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserSettingsDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "settings"
+        ]
+      }
+    },
+    "/surveys/my": {
+      "get": {
+        "operationId": "SurveysController_getMySurveys",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MySurveyDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "surveys"
+        ]
+      }
+    },
+    "/surveys/responses/{surveyId}": {
+      "get": {
+        "operationId": "SurveysController_getResponses",
+        "parameters": [
+          {
+            "name": "surveyId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "default": 1,
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "example": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedSurveyResponsesDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "surveys"
+        ]
+      }
+    },
+    "/surveys": {
+      "get": {
+        "operationId": "SurveysController_listAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SurveyListItemDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "surveys"
+        ]
+      },
+      "post": {
+        "operationId": "SurveysController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSurveyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SurveyListItemDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "surveys"
+        ]
+      }
+    },
+    "/surveys/{id}/respond": {
+      "post": {
+        "operationId": "SurveysController_respond",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubmitSurveyResponseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "surveys"
+        ]
+      }
+    },
+    "/surveys/{id}": {
+      "delete": {
+        "operationId": "SurveysController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "surveys"
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "health"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Click Intern Core API",
+    "description": "Internal platform API for internship tracking, assessments, and administration",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "admin@click.local"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123",
+            "minLength": 6
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "PublicUserDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "4be09f38-075b-445d-9f1c-0e6ec9eb4086"
+          },
+          "email": {
+            "type": "string",
+            "example": "admin@click.local"
+          },
+          "fullName": {
+            "type": "string",
+            "example": "System Admin"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "ADMIN",
+              "MENTOR",
+              "INTERN"
+            ],
+            "example": "ADMIN"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2026-04-02T11:04:44.276Z"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "fullName",
+          "role",
+          "createdAt"
+        ]
+      },
+      "AuthTokensResponseDto": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/PublicUserDto"
+          }
+        },
+        "required": [
+          "accessToken",
+          "user"
+        ]
+      },
+      "ApiErrorResponseDto": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 400
+          },
+          "error": {
+            "type": "string",
+            "example": "Bad Request"
+          },
+          "message": {
+            "oneOf": [
+              {
+                "type": "string",
+                "example": "mentorId is required for interns"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": [
+                  "email must be an email",
+                  "password must be longer than or equal to 6 characters"
+                ]
+              }
+            ]
+          }
+        },
+        "required": [
+          "statusCode",
+          "error",
+          "message"
+        ]
+      },
+      "LogoutResponseDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          }
+        },
+        "required": [
+          "success"
+        ]
+      },
+      "MentorBriefDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "e9009939-2af2-44aa-9f64-1a2ee926e146"
+          },
+          "fullName": {
+            "type": "string",
+            "example": "Mentor One"
+          },
+          "email": {
+            "type": "string",
+            "example": "mentor1@click.local"
+          }
+        },
+        "required": [
+          "id",
+          "fullName"
+        ]
+      },
+      "InternProfileMetaDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "148a10d9-885c-43e2-beb2-12b41cbdf367"
+          },
+          "mentorId": {
+            "type": "string",
+            "example": "e9009939-2af2-44aa-9f64-1a2ee926e146"
+          },
+          "mentor": {
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MentorBriefDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "mentorId"
+        ]
+      },
+      "AdminUserDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "4be09f38-075b-445d-9f1c-0e6ec9eb4086"
+          },
+          "email": {
+            "type": "string",
+            "example": "admin@click.local"
+          },
+          "fullName": {
+            "type": "string",
+            "example": "System Admin"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "ADMIN",
+              "MENTOR",
+              "INTERN"
+            ],
+            "example": "ADMIN"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2026-04-02T11:04:44.276Z"
+          },
+          "internProfile": {
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InternProfileMetaDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "fullName",
+          "role",
+          "createdAt"
+        ]
+      },
+      "PaginatedAdminUsersDto": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "example": 42
+          },
+          "page": {
+            "type": "number",
+            "example": 1
+          },
+          "pageSize": {
+            "type": "number",
+            "example": 20
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminUserDto"
+            }
+          }
+        },
+        "required": [
+          "total",
+          "page",
+          "pageSize",
+          "items"
+        ]
+      },
+      "CreateUserDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "intern6@click.local"
+          },
+          "fullName": {
+            "type": "string",
+            "example": "Intern Six"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "ADMIN",
+              "MENTOR",
+              "INTERN"
+            ],
+            "example": "INTERN"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123",
+            "minLength": 6
+          },
+          "mentorId": {
+            "type": "string",
+            "example": "e9009939-2af2-44aa-9f64-1a2ee926e146"
+          }
+        },
+        "required": [
+          "email",
+          "fullName",
+          "role",
+          "password"
+        ]
+      },
+      "UpdateUserDto": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "example": "Updated Intern Name"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "ADMIN",
+              "MENTOR",
+              "INTERN"
+            ],
+            "example": "MENTOR"
+          },
+          "mentorId": {
+            "type": "string",
+            "example": "e9009939-2af2-44aa-9f64-1a2ee926e146"
+          }
+        }
+      },
+      "CriterionResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "criterion-react"
+          },
+          "title": {
+            "type": "string",
+            "example": "React Knowledge"
+          },
+          "description": {
+            "type": "string",
+            "example": "Component architecture and hooks"
+          },
+          "maxScore": {
+            "type": "number",
+            "example": 5,
+            "minimum": 1,
+            "maximum": 5
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "description",
+          "maxScore"
+        ]
+      },
+      "AssessmentMentorDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "e9009939-2af2-44aa-9f64-1a2ee926e146"
+          },
+          "fullName": {
+            "type": "string",
+            "example": "Mentor One"
+          }
+        },
+        "required": [
+          "id",
+          "fullName"
+        ]
+      },
+      "AssessmentResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "0b1b3c25-ff2a-4995-b3c5-45c9db43961b"
+          },
+          "internId": {
+            "type": "string",
+            "example": "148a10d9-885c-43e2-beb2-12b41cbdf367"
+          },
+          "mentorId": {
+            "type": "string",
+            "example": "e9009939-2af2-44aa-9f64-1a2ee926e146"
+          },
+          "criterionId": {
+            "type": "string",
+            "example": "criterion-react"
+          },
+          "score": {
+            "type": "number",
+            "example": 4,
+            "minimum": 1,
+            "maximum": 5
+          },
+          "comment": {
+            "type": "string",
+            "example": "Initial review for Intern One",
+            "nullable": true
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2026-04-02T11:04:44.560Z"
+          },
+          "criterion": {
+            "$ref": "#/components/schemas/CriterionResponseDto"
+          },
+          "mentor": {
+            "$ref": "#/components/schemas/AssessmentMentorDto"
+          }
+        },
+        "required": [
+          "id",
+          "internId",
+          "mentorId",
+          "criterionId",
+          "score",
+          "createdAt"
+        ]
+      },
+      "MentorInternProfileWithAssessmentsDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "148a10d9-885c-43e2-beb2-12b41cbdf367"
+          },
+          "mentorId": {
+            "type": "string",
+            "example": "e9009939-2af2-44aa-9f64-1a2ee926e146",
+            "nullable": true
+          },
+          "mentor": {
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MentorBriefDto"
+              }
+            ]
+          },
+          "assessments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssessmentResponseDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "mentorId",
+          "assessments"
+        ]
+      },
+      "MentorAllInternListItemDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "81c14d5d-8593-4453-8ea9-0198b0f01a02"
+          },
+          "fullName": {
+            "type": "string",
+            "example": "Intern One"
+          },
+          "email": {
+            "type": "string",
+            "example": "intern1@click.local"
+          },
+          "photoUrl": {
+            "type": "object",
+            "example": "/uploads/abc.webp",
+            "nullable": true
+          },
+          "internProfile": {
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MentorInternProfileWithAssessmentsDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "fullName",
+          "email",
+          "internProfile"
+        ]
+      },
+      "PaginatedMentorAllInternsDto": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "example": 42
+          },
+          "page": {
+            "type": "number",
+            "example": 1
+          },
+          "pageSize": {
+            "type": "number",
+            "example": 20
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MentorAllInternListItemDto"
+            }
+          }
+        },
+        "required": [
+          "total",
+          "page",
+          "pageSize",
+          "items"
+        ]
+      },
+      "UserBriefDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "81c14d5d-8593-4453-8ea9-0198b0f01a02"
+          },
+          "fullName": {
+            "type": "string",
+            "example": "Intern One"
+          },
+          "email": {
+            "type": "string",
+            "example": "intern1@click.local"
+          },
+          "photoUrl": {
+            "type": "object",
+            "example": "/uploads/abc.webp",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "fullName",
+          "email"
+        ]
+      },
+      "MentorInternListItemDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "148a10d9-885c-43e2-beb2-12b41cbdf367"
+          },
+          "userId": {
+            "type": "string",
+            "example": "81c14d5d-8593-4453-8ea9-0198b0f01a02"
+          },
+          "mentorId": {
+            "type": "string",
+            "example": "e9009939-2af2-44aa-9f64-1a2ee926e146"
+          },
+          "user": {
+            "$ref": "#/components/schemas/UserBriefDto"
+          },
+          "assessments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssessmentResponseDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "userId",
+          "mentorId",
+          "user",
+          "assessments"
+        ]
+      },
+      "MentorInternDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "148a10d9-885c-43e2-beb2-12b41cbdf367"
+          },
+          "userId": {
+            "type": "string",
+            "example": "81c14d5d-8593-4453-8ea9-0198b0f01a02"
+          },
+          "mentorId": {
+            "type": "string",
+            "example": "e9009939-2af2-44aa-9f64-1a2ee926e146"
+          },
+          "user": {
+            "$ref": "#/components/schemas/UserBriefDto"
+          }
+        },
+        "required": [
+          "id",
+          "userId",
+          "mentorId",
+          "user"
+        ]
+      },
+      "MentorInternDetailDto": {
+        "type": "object",
+        "properties": {
+          "intern": {
+            "$ref": "#/components/schemas/MentorInternDto"
+          },
+          "criteria": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CriterionResponseDto"
+            }
+          },
+          "assessments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssessmentResponseDto"
+            }
+          }
+        },
+        "required": [
+          "intern",
+          "criteria",
+          "assessments"
+        ]
+      },
+      "CreateAssessmentDto": {
+        "type": "object",
+        "properties": {
+          "internId": {
+            "type": "string",
+            "example": "148a10d9-885c-43e2-beb2-12b41cbdf367"
+          },
+          "criterionId": {
+            "type": "string",
+            "example": "criterion-react"
+          },
+          "score": {
+            "type": "number",
+            "example": 4,
+            "minimum": 1,
+            "maximum": 5
+          },
+          "comment": {
+            "type": "string",
+            "example": "Strong progress in hooks and composition"
+          }
+        },
+        "required": [
+          "internId",
+          "criterionId",
+          "score"
+        ]
+      },
+      "CreateCriterionDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "React Knowledge"
+          },
+          "description": {
+            "type": "string",
+            "example": "Component architecture and hooks"
+          },
+          "maxScore": {
+            "type": "number",
+            "example": 5,
+            "minimum": 1,
+            "maximum": 5
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "maxScore"
+        ]
+      },
+      "LeaderboardEntryDto": {
+        "type": "object",
+        "properties": {
+          "internId": {
+            "type": "string",
+            "example": "148a10d9-885c-43e2-beb2-12b41cbdf367"
+          },
+          "userId": {
+            "type": "string",
+            "example": "81c14d5d-8593-4453-8ea9-0198b0f01a02"
+          },
+          "fullName": {
+            "type": "string",
+            "example": "Intern One"
+          },
+          "averageScore": {
+            "type": "number",
+            "example": 4
+          },
+          "totalAssessments": {
+            "type": "number",
+            "example": 1
+          }
+        },
+        "required": [
+          "internId",
+          "userId",
+          "fullName",
+          "averageScore",
+          "totalAssessments"
+        ]
+      },
+      "UserSettingsDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "4be09f38-075b-445d-9f1c-0e6ec9eb4086"
+          },
+          "email": {
+            "type": "string",
+            "example": "admin@click.local"
+          },
+          "fullName": {
+            "type": "string",
+            "example": "System Admin"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "ADMIN",
+              "MENTOR",
+              "INTERN"
+            ],
+            "example": "ADMIN"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2026-04-02T11:04:44.276Z"
+          },
+          "phone": {
+            "type": "object",
+            "example": "+998901234567",
+            "nullable": true
+          },
+          "photoUrl": {
+            "type": "object",
+            "example": "/uploads/4be09f38-075b-445d-9f1c-0e6ec9eb4086.webp",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "fullName",
+          "role",
+          "createdAt"
+        ]
+      },
+      "UpdateSettingsMultipartDto": {
+        "type": "object",
+        "properties": {
+          "phone": {
+            "type": "object",
+            "example": "+998901234567",
+            "nullable": true,
+            "description": "Phone in E.164 format. Send empty string or \"null\" to clear value."
+          },
+          "removePhoto": {
+            "type": "boolean",
+            "example": false,
+            "description": "Set true to remove current photo. Cannot be combined with photo file in same request."
+          },
+          "photo": {
+            "type": "string",
+            "format": "binary",
+            "description": "Profile photo. Supported formats: JPEG, PNG, WebP. Max size: 5MB."
+          }
+        }
+      },
+      "SurveyQuestionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string",
+            "example": "Communication Skills"
+          },
+          "order": {
+            "type": "number",
+            "example": 0
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "order"
+        ]
+      },
+      "MySurveyDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string",
+            "example": "Q2 Mentor Review"
+          },
+          "target": {
+            "type": "string",
+            "enum": [
+              "MENTOR",
+              "INTERN"
+            ]
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SurveyQuestionDto"
+            }
+          },
+          "isCompleted": {
+            "type": "boolean",
+            "example": false
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "target",
+          "questions",
+          "isCompleted",
+          "createdAt"
+        ]
+      },
+      "SurveyRespondentDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string",
+            "example": "Mentor One"
+          },
+          "email": {
+            "type": "string",
+            "example": "mentor1@click.local"
+          }
+        },
+        "required": [
+          "id",
+          "fullName",
+          "email"
+        ]
+      },
+      "SurveyAnswerViewDto": {
+        "type": "object",
+        "properties": {
+          "questionId": {
+            "type": "string"
+          },
+          "questionTitle": {
+            "type": "string",
+            "example": "Communication Skills"
+          },
+          "score": {
+            "type": "object",
+            "example": 4,
+            "nullable": true
+          },
+          "comment": {
+            "type": "object",
+            "example": "Very clear communicator",
+            "nullable": true
+          }
+        },
+        "required": [
+          "questionId",
+          "questionTitle"
+        ]
+      },
+      "SurveyResponseViewDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "respondent": {
+            "$ref": "#/components/schemas/SurveyRespondentDto"
+          },
+          "comment": {
+            "type": "object",
+            "example": "My mentor is very helpful",
+            "nullable": true
+          },
+          "mentorName": {
+            "type": "object",
+            "example": "Mentor One",
+            "nullable": true
+          },
+          "answers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SurveyAnswerViewDto"
+            }
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "respondent",
+          "answers",
+          "createdAt"
+        ]
+      },
+      "PaginatedSurveyResponsesDto": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "example": 42
+          },
+          "page": {
+            "type": "number",
+            "example": 1
+          },
+          "pageSize": {
+            "type": "number",
+            "example": 20
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SurveyResponseViewDto"
+            }
+          }
+        },
+        "required": [
+          "total",
+          "page",
+          "pageSize",
+          "items"
+        ]
+      },
+      "SurveyListItemDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string",
+            "example": "Q2 Mentor Review"
+          },
+          "target": {
+            "type": "string",
+            "enum": [
+              "MENTOR",
+              "INTERN"
+            ]
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "questionCount": {
+            "type": "number",
+            "example": 3
+          },
+          "responseCount": {
+            "type": "number",
+            "example": 7
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "target",
+          "createdAt",
+          "questionCount",
+          "responseCount"
+        ]
+      },
+      "CreateSurveyQuestionDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Communication Skills"
+          },
+          "order": {
+            "type": "number",
+            "example": 0
+          }
+        },
+        "required": [
+          "title",
+          "order"
+        ]
+      },
+      "CreateSurveyDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Q2 Mentor Review"
+          },
+          "target": {
+            "type": "string",
+            "enum": [
+              "MENTOR",
+              "INTERN"
+            ],
+            "example": "MENTOR"
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateSurveyQuestionDto"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "target"
+        ]
+      },
+      "SurveyAnswerInputDto": {
+        "type": "object",
+        "properties": {
+          "questionId": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "comment": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "questionId",
+          "score"
+        ]
+      },
+      "SubmitSurveyResponseDto": {
+        "type": "object",
+        "properties": {
+          "answers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SurveyAnswerInputDto"
+            }
+          },
+          "comment": {
+            "type": "string",
+            "example": "Great mentor, very supportive."
+          }
+        }
+      }
+    }
+  }
+}

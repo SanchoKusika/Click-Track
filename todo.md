@@ -3,7 +3,7 @@
 Список технического долга и улучшений, разбитый на фазы по приоритету.
 Фазы выполняются последовательно — каждая опирается на предыдущую.
 
-**Прогресс:** Фазы 1–4 завершены · Фазы 5–6 запланированы
+**Прогресс:** Фазы 1–4 завершены · Фаза 5 закрыта (33 отложена до выбора хостинга) · Фаза 6: готовы 37, 38; 35, 36 пропущены; 39 — отдельный заход
 
 ---
 
@@ -45,7 +45,7 @@
 > Лечение N+1 и линейного роста запросов на админ-экранах.
 
 - [x] **17.** Leaderboard переписан на `prisma.assessment.groupBy({ by: ['internId'], _avg, _count })` + одиночный `findMany` по профилям. Ушёл N+1.
-- [x] **18.** Пагинация (`take/skip` + `total`) в `GET /admin/users`, `GET /assessments/mentor/interns/all`, `GET /surveys/responses/:surveyId`. Общий `PaginationQueryDto` (page/pageSize) и Paginated*Dto в swagger; фронт-хуки переведены на shape `{ items, total, page, pageSize }`.
+- [x] **18.** Пагинация (`take/skip` + `total`) в `GET /admin/users`, `GET /assessments/mentor/interns/all`, `GET /surveys/responses/:surveyId`. Общий `PaginationQueryDto` (page/pageSize) и Paginated\*Dto в swagger; фронт-хуки переведены на shape `{ items, total, page, pageSize }`.
 - [x] **19.** Индексы Prisma: `@@index([role])` на `User`, `@@index([mentorId])` и `@@index([criterionId])` на `Assessment`. Миграция `20260427120000_add_perf_indices`.
 - [x] **20.** Один источник seed: `seed.ts` + `ts-node` в `prisma:seed`, `seed.js` удалён.
 
@@ -71,13 +71,13 @@
 > **Статус:** запланирована
 > Готовность к боевому развёртыванию: CI, healthchecks, бэкапы, TLS.
 
-- [ ] **28.** Frontend Dockerfile → multi-stage: build + `nginx:alpine` для отдачи `dist/` (gzip, cache headers, SPA-fallback).
-- [ ] **29.** Backend health-endpoint `/health` (`@nestjs/terminus`) + `healthcheck` в compose.
-- [ ] **30.** GitHub Actions: lint, typecheck, test, build на PR; build & push образов на `main`.
-- [ ] **31.** Логирование — `Pino` + request-ID middleware.
-- [ ] **32.** Стратегия uploads: либо volume mount, либо S3/MinIO-совместимый storage. Вынести `STORAGE_DRIVER` в env.
-- [ ] **33.** Reverse-proxy `nginx`-сервис в compose с TLS-termination (или Traefik/Caddy).
-- [ ] **34.** Backup-скрипт Postgres (`pg_dump` cron или WAL-G).
+- [x] **28.** Frontend Dockerfile → multi-stage: build + `nginx:1.27-alpine` для отдачи `dist/` (gzip, cache headers `immutable` для `/assets/`, SPA-fallback `try_files $uri /index.html`). Прод-порт переехал с 5173 на 8080:80.
+- [x] **29.** Backend health-endpoint `/health` (`@nestjs/terminus` + `PrismaHealthIndicator`) + `healthcheck` в prod compose (через `node -e http.get`); frontend теперь ждёт backend `service_healthy`.
+- [x] **30.** GitHub Actions (`.github/workflows/ci.yml`): на PR и push в `master` гоняет `lint` + `build` отдельно для backend и frontend, использует `npm cache` по `package-lock.json`. Frontend `typecheck` временно отключён до миграции HeroUI v3 (item 39).
+- [x] **31.** Логирование — `nestjs-pino` + `pino-http`, request-id из заголовка `X-Request-Id` (или `randomUUID()`), эхо в response-header, redact `authorization`/`cookie`, `/health` исключён из autoLogging. В dev — `pino-pretty`, в prod — JSON.
+- [x] **32.** Uploads вынесены на named volume `backend_uploads:/app/uploads` в prod compose. S3/MinIO отложены до реальной потребности (для текущего масштаба избыточно).
+- [ ] **33.** Reverse-proxy с TLS — отложен до выбора хостинга. Рекомендация: **Caddy** (auto-HTTPS через Let's Encrypt, минимум конфига).
+- [x] **34.** `scripts/db-backup.sh` (`pg_dump -F c` через `docker compose exec`, ротация по `RETENTION_DAYS`, по умолчанию 14 дней) + `scripts/db-restore.sh`. Дампы пишутся в named volume `postgres_backups:/backups` — Postgres-сервис монтирует его. Запускать руками или через хостовой cron.
 
 ---
 
@@ -86,8 +86,8 @@
 > **Статус:** запланирована
 > Гарантия, что регрессии ловятся автоматически, а не на пользователях.
 
-- [ ] **35.** E2E на ключевых flows: login, refresh, mentor-assessment, intern-leaderboard, admin-CRUD, surveys.
-- [ ] **36.** Frontend integration-тесты: login → дашборд, защита роутов.
-- [ ] **37.** Документация env-переменных с разделением dev / staging / prod.
-- [ ] **38.** Postman/Insomnia collection или экспорт OpenAPI в `docs/`.
+- [ ] **35.** ~~E2E на ключевых flows~~ — пропущено для текущего MVP. Вернуться, если появятся реальные пользователи и регрессии.
+- [ ] **36.** ~~Frontend integration-тесты~~ — пропущено по той же причине; есть smoke-тесты на страницах в `frontend/src/pages/pages.smoke.test.tsx`.
+- [x] **37.** `docs/ENV.md` — все переменные с типами/дефолтами + три профиля (local dev / staging / prod). `.env.example` и `.env.docker.example` остаются как шаблоны.
+- [x] **38.** `docs/openapi.json` (58KB) — экспорт текущей Swagger-схемы. `swagger:generate` теперь пишет туда (`backend/src/swagger/generate.ts`). Старая запись в корень `swagger.json` убрана. Перегенерация: `npm run swagger:generate -w backend`.
 - [ ] **39.** HeroUI v3 props migration. `npm run typecheck` ловит 75 ошибок несовместимости с v3 BETA: `radius` (Card/Button/Chip), `isLoading` (Button → `isPending`), `color` на Button, `variant="solid"|"flat"|"light"|"shadow"` (заменены на `primary|secondary|tertiary|outline|ghost|danger|danger-soft`), `Tooltip.content`, `Select.onChange` и `ToggleButtonGroup.onSelectionChange` принимают `Key`-типы. Долг скрывался сломанным скриптом (`tsc --noEmit --incremental false` молча печатал help). После Phase 3 скрипт исправлен (`tsc -b --noEmit`), а `npm run build` развязан от `tsc -b` (только `vite build`), чтобы TS-долг не блокировал прод. Вернуть `tsc -b` в build после миграции.

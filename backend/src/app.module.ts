@@ -10,11 +10,15 @@ import { CriteriaModule } from './criteria/criteria.module';
 import { InternModule } from './intern/intern.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
+import { LoggerModule } from 'nestjs-pino';
+import { randomUUID } from 'node:crypto';
+import { IncomingMessage, ServerResponse } from 'node:http';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
 import { RolesGuard } from './common/guards/roles.guard';
 import { SettingsModule } from './settings/settings.module';
 import { SurveysModule } from './surveys/surveys.module';
+import { HealthModule } from './health/health.module';
 import { envValidationSchema } from './common/config/env.validation';
 
 @Module({
@@ -23,6 +27,38 @@ import { envValidationSchema } from './common/config/env.validation';
       isGlobal: true,
       validationSchema: envValidationSchema,
       validationOptions: { abortEarly: false },
+    }),
+    LoggerModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => {
+        const isProd = config.get<string>('NODE_ENV') === 'production';
+        return {
+          pinoHttp: {
+            level: isProd ? 'info' : 'debug',
+            genReqId: (req: IncomingMessage, res: ServerResponse) => {
+              const headerId = req.headers['x-request-id'];
+              const id =
+                (Array.isArray(headerId) ? headerId[0] : headerId) ??
+                randomUUID();
+              res.setHeader('X-Request-Id', id);
+              return id;
+            },
+            customProps: (req: IncomingMessage) => ({
+              reqId: (req as { id?: string }).id,
+            }),
+            transport: isProd
+              ? undefined
+              : {
+                  target: 'pino-pretty',
+                  options: { singleLine: true, colorize: true },
+                },
+            redact: ['req.headers.authorization', 'req.headers.cookie'],
+            autoLogging: {
+              ignore: (req: IncomingMessage) => req.url === '/health',
+            },
+          },
+        };
+      },
     }),
     ThrottlerModule.forRootAsync({
       inject: [ConfigService],
@@ -48,6 +84,7 @@ import { envValidationSchema } from './common/config/env.validation';
     InternModule,
     SettingsModule,
     SurveysModule,
+    HealthModule,
   ],
   controllers: [AppController],
   providers: [

@@ -1,13 +1,21 @@
 import { NestFactory } from '@nestjs/core';
+import {
+  ExpressAdapter,
+  NestExpressApplication,
+} from '@nestjs/platform-express';
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { AppModule } from '../app.module';
 import { createSwaggerDocument } from './document';
 
 async function generateSwagger() {
-  const app = await NestFactory.create(AppModule, { logger: false });
+  const app = await NestFactory.create<NestExpressApplication>(
+    AppModule,
+    new ExpressAdapter(),
+    { logger: false },
+  );
   const document = createSwaggerDocument(app);
-  const outputPath = resolve(process.cwd(), '..', 'swagger.json');
+  const outputPath = resolve(process.cwd(), '..', 'docs', 'openapi.json');
 
   await writeFile(outputPath, JSON.stringify(document, null, 2));
   await app.close();
