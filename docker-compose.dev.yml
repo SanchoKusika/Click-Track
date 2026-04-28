@@ -39,6 +39,7 @@ services:
     env_file:
       - .env.docker
     environment:
+      NODE_ENV: development
       CHOKIDAR_USEPOLLING: "true"
     depends_on:
       - backend
